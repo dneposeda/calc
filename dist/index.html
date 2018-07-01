@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+
+<link href="css/style.css" rel="stylesheet"></head>
+<body>
+    
+<header class="header">
+    <!-- <h1 class="header__title" >Калькулятор</h1> -->
+</header>
+
+
+<div class="calculator">
+<div class="theme">
+    <input type="checkbox" class="theme__switch-input" id="themeSwitch" />
+    <label for="themeSwitch" class="theme__switch-label" id="btnChengeTheme">Темная тема:</label>
+</div>
+<div class="calc light" id="calc">
+    <div class="calc__display gradient">
+        <input disabled type="text" class="calc__total" id="display" value="0">
+        <!-- <div class="calc__intup-numb">1995-30%</div> -->
+    </div>
+    <div class="calc__keys ">
+        <div class="calc__keys-row key--bg">
+            <button class="key key--ac key--bg" id="keyac">AC</button>
+            <button class="key key--division key--bg keyoperations">/</button>
+        </div>
+        <div class="calc__keys-row">
+            <button class="key keynumber">7</button>
+            <button class="key keynumber">8</button>
+            <button class="key keynumber">9</button>
+            <button class="key key--bg keyoperations">*</button>
+        </div>
+        <div class="calc__keys-row">
+            <button class="key keynumber">4</button>
+            <button class="key keynumber">5</button>
+            <button class="key keynumber">6</button>
+            <button class="key key--bg keyoperations">-</button>
+        </div>
+        <div class="calc__keys-row">
+            <button class="key keynumber">1</button>
+            <button class="key keynumber">2</button>
+            <button class="key keynumber">3</button>
+            <button class="key key--bg keyoperations">+</button>
+        </div>
+        <div class="calc__keys-row">
+            <button class="key key--zero keynumber">0</button>
+            <button class="key key--bg" id="keydot">,</button>
+            <button class="key key--total gradient keyoperations">=</button>
+        </div>
+    </div>
+</div>  
+
+
+</div>
+
+
+<footer class="footer">
+
+</footer>
+
+
+
+<script type="text/javascript" src="app.js"></script></body>
+</html>

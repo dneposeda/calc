@@ -1,0 +1,95 @@
+* {
+    box-sizing: border-box;
+    outline: none;
+}
+
+body {
+    background-color: $bg;
+    font-family: $main-font;
+}
+
+.theme {
+    width: 260px;  
+    margin: 0 auto 20px;
+
+}
+
+.calc {
+    width: 260px;
+    margin: 0 auto;
+    box-shadow: 0px 13px 69px -5px rgba(51,51,51,0.61);
+    border-radius: 9px;
+}
+
+
+
+.calc__display {
+    padding: 40px 20px;
+    text-align: right;
+    border-top-right-radius: 9px;
+    border-top-left-radius: 9px;
+
+}
+
+.calc__total {
+    font-size: 30px;
+    border: none;
+    background: transparent;
+    width: 220px;
+    text-align: right;
+}
+
+.calc__intup-numb {
+    font-size: 16px;
+}
+
+.calc__keys-row {
+    display: flex;
+}
+
+.calc__keys {
+    transition: all 0.2s;
+    border-bottom-right-radius: 9px;
+    border-bottom-left-radius: 9px;
+}
+
+
+
+.key {
+    width: 65px;
+    height: 65px;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.key--bg {
+    font-size: 30px;
+}
+
+.key--division {
+    margin-left: auto;
+    font-size: 26px;
+}
+
+.key--ac {
+    font-size: 20px;
+}
+
+.key--zero {
+    border-bottom-left-radius: 9px;
+    flex-grow: 1;
+    text-align: left;
+    padding-left: 25px;
+}
+
+.key--multiplication {
+    border-bottom-right-radius: 9px;
+}
+
+.key--total {
+    font-size: 33px;
+    border-bottom-right-radius: 9px;
+    transition: background 0.2s;
+}

@@ -1,0 +1,51 @@
+.light {
+
+    .calc__keys {
+        background-color: $key-bg;
+    }
+
+    .calc__total {
+        color: $text-color;
+    }
+    
+    .calc__intup-numb {
+        color: $intup-numb;
+    }
+    
+    .key {
+        color: $key;
+        background-color: $key-bg;
+        
+        &:hover {
+            background: $key-hover;
+            color: $key;
+        }
+    }
+    
+    .key--bg {
+        background-color: $lightgrey;
+    }
+    
+    .key--ac {
+        color: $key-ac;
+    }
+    
+    
+    .key--total {
+        color: $text-color;
+        background-color: $lightgrey;
+    }
+    
+    
+    .gradient {
+        background: $pink;
+        background: linear-gradient(45deg, $pink 0%, $orange 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$pink', endColorstr='$orange',GradientType=1 );
+    
+    }
+
+
+}
+
+
+

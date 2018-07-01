@@ -1,0 +1,49 @@
+.dark {
+
+    .calc__keys {
+        background-color: $dark-key-bg;
+    }
+
+    .calc__total {
+        color: $text-color;
+    }
+
+    .calc__intup-numb {
+        color: $intup-numb;
+    }
+
+    .key {
+        color: $dark-key;
+        background-color: $dark-key-bg;
+        
+        &:hover {
+            background: $dark-key-hover;
+        }
+    }
+
+    .key--bg {
+        background-color: #374462;
+        color: #a8caec;
+    }
+    
+    .key--ac {
+        color: $key-ac;
+    }
+    
+    
+    .key--total {
+        color: $text-color;
+        background-color: $lightgrey;
+    }
+
+    .gradient {
+        background: $lightblue;
+        background: linear-gradient(45deg, $lightblue 0%,$blue 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$lightblue', endColorstr='$blue',GradientType=1 );
+    
+    }
+
+}
+
+
+
