@@ -92,6 +92,38 @@ body {
   border-bottom-right-radius: 9px;
   transition: background 0.2s; }
 
+.calculator {
+  margin-bottom: 150px; }
+
+.header {
+  height: 86px;
+  background-color: #464553;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px; }
+
+.footer {
+  max-width: 700px;
+  height: 90px;
+  margin: 0 auto;
+  border-top: 1px solid #464553;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  .footer__copyright {
+    line-height: 1.5;
+    color: #001b2a; }
+  .footer__link {
+    text-decoration: none;
+    color: #001b2a;
+    border-bottom: 1px solid #001b2a;
+    transition: all 0.2s; }
+    .footer__link:hover {
+      color: #ec805f;
+      border-bottom-color: #ec805f; }
+
 .dark .calc__keys {
   background-color: #3a4868; }
 
@@ -192,5 +224,33 @@ body {
 
 .theme__switch-label:active:after {
   width: 50px; }
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .logo__img {
+    margin-right: 20px;
+    width: 45px;
+    height: 45px; }
+  .logo__text {
+    color: #f4f4f4;
+    font-size: 22px;
+    text-transform: uppercase; }
+
+.social__list {
+  padding: 0;
+  display: flex; }
+
+.social__item {
+  list-style: none;
+  margin-right: 8px; }
+
+.social__link svg {
+  fill: #464553;
+  transition: all 0.2s; }
+
+.social__link:hover svg {
+  fill: #ec805f; }
 
 /*# sourceMappingURL=style.css.map */

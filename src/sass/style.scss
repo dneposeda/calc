@@ -3,7 +3,12 @@
 
 @import "layout/main.scss";
 
+@import "sections/header.scss";
+@import "sections/footer.scss";
+
 @import "theme/theme-dark.scss";
 @import "theme/theme-light.scss";
 
 @import "components/switch.scss";
+@import "components/logo.scss";
+@import "components/social.scss";

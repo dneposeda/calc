@@ -1,0 +1,19 @@
+.social__list {
+    padding: 0;
+    display: flex;
+}
+
+.social__item {
+    list-style: none;
+    margin-right: 8px;
+}
+
+.social__link svg {
+    fill: #464553;
+    transition: all 0.2s;
+}
+
+.social__link:hover svg {
+    fill: #ec805f;
+}
+

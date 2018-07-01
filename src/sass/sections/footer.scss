@@ -1,0 +1,26 @@
+.footer {
+    max-width: 700px;
+    height: 90px;
+    margin: 0 auto;
+    border-top: 1px solid #464553;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__copyright {
+        line-height: 1.5;
+        color: #001b2a;
+    }
+
+    &__link {
+        text-decoration: none;
+        color: #001b2a;
+        border-bottom: 1px solid #001b2a;
+        transition: all 0.2s;
+
+        &:hover {
+            color: #ec805f;
+            border-bottom-color: #ec805f;
+        }
+    }
+}
