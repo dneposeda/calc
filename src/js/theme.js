@@ -8,10 +8,10 @@
  */
     var chengeTheme = function(){
 
-        var calc = doc.getElementById('calc');
+        var calc = document.getElementById('calc');
         calc.classList.toggle('dark');
         calc.classList.toggle('light');
    
     };
 
-export var chengeTheme;
+export default chengeTheme;
