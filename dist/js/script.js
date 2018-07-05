@@ -257,12 +257,11 @@ keyDot.addEventListener('click', function(e){
 /*!*************************!*\
   !*** ./src/js/theme.js ***!
   \*************************/
-/*! exports provided: chengeTheme */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "chengeTheme", function() { return chengeTheme; });
 
 
 /**
@@ -279,7 +278,7 @@ __webpack_require__.r(__webpack_exports__);
    
     };
 
-var chengeTheme;
+/* harmony default export */ __webpack_exports__["default"] = (chengeTheme);
 
 /***/ })
 
