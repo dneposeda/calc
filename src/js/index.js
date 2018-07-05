@@ -1,5 +1,6 @@
 import 'normalize.css';
 import '../css/style.css';
+import chengeTheme from './theme';
 
 
 var doc = document,
@@ -12,17 +13,6 @@ var doc = document,
     memoryCurrentNumber = 0,
     memoryOperation = '',
     entryNewNumber = false;
-
-
-
-function ChengeTheme(){
-    
-    var calc = doc.getElementById('calc');
-    calc.classList.toggle('dark');
-    calc.classList.toggle('light');
-
-};
-
 
 
 function pressKeyNumber(numb){
@@ -75,7 +65,9 @@ function pressKeyOperation(symbol){
 };
 
 
-
+/**
+ * Функция точки, 
+ */
 function pressKeyDot(dot){
 
     var localMemoryDot = display.value;
@@ -94,7 +86,9 @@ function pressKeyDot(dot){
 };
 
 
-
+/**
+ * Функция полной очистки значений калькулятора
+ */
 function pressKeyClear(){
     display.value = 0;
     memoryCurrentNumber = 0;
@@ -106,7 +100,7 @@ function pressKeyClear(){
 
 
 /* События на клик смены темы */
-btnChengeTheme.addEventListener('click', ChengeTheme);
+btnChengeTheme.addEventListener('click', chengeTheme);
 
 /* События на клик по цифрам */
 for (var i = 0; i<keyNumbers.length; i++){

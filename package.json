@@ -9,7 +9,7 @@
     "delete:dist": "rimraf -- dist .awcache",
     "server": "node server.js",
     "build": "webpack --mode production",
-    "build:dev": "webpack --mode development",
+    "build:dev": "npm run delete:dist && npm run sass && webpack --mode development",
     "build:prod": "npm run delete:dist && npm run sass && npm run build"
   },
   "keywords": [],
