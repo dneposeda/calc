@@ -3,20 +3,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-module.exports = {
-	
-  entry: {
-    app: './src/js/index.js',
-  },
-  
-  output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
-  },
-  
-  devtool: 'source-map',
+var clientConfig = (function webpackConfig(){
 
-  module: {
+  var config = Object.assign({});
+
+  config.entry = './src/js/index.js';
+
+  config.output = {
+    filename: 'js/script.js',
+    path: path.resolve(__dirname, 'dist')
+  };
+
+  config.module = {
     rules: [
       {
         test: /\.css$/,
@@ -35,37 +33,51 @@ module.exports = {
               options: {
                 sourceMap: true
               }
-          },
-
+          }
         ]
-      },
-    ]
-  },
-  
-  plugins: [
+      }
 
+    ]
+  };
+
+  config.devtool = 'source-map';
+
+  config.resolve = {};
+
+  config.plugins = [];
+
+  config.plugins.push(
     new HtmlWebpackPlugin({
 	    template: 'src/template/index.html'
-    }),
-	
+    })
+  );
+
+  config.plugins.push(
     new MiniCssExtractPlugin({
       filename: 'css/style.css',
-    }),
-    
+    })
+  );
+
+  config.plugins.push(
     new CopyWebpackPlugin([
       {
         from: 'assets/img',
         to: 'assets/img/[name].[ext]',
       }
-    ]),
+    ])
+  );
 
+  config.plugins.push(
     new CopyWebpackPlugin([
       {
         from: 'assets/fonts',
         to: 'assets/fonts/[name].[ext]',
       }
-    ]),
+    ])
+  );
 
-  ],
+  return config;
 
-};
+});
+
+module.exports = clientConfig;

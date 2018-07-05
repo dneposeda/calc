@@ -5,12 +5,12 @@
   "scripts": {
     "sass": "node-sass --source-map true \"src/sass/style.scss\" \"src/css/style.css\" ",
     "sass:watch": "node-sass --watch --source-map true \"src/sass/style.scss\" \"dist/css/style.css\" ",
-    "dev": "webpack --mode development",
     "watch": "webpack --watch",
     "delete:dist": "rimraf -- dist .awcache",
     "server": "node server.js",
     "build": "webpack --mode production",
-    "build:prod": "npm run delete:dist && npm run sass && webpack --mode production"
+    "build:dev": "webpack --mode development",
+    "build:prod": "npm run delete:dist && npm run sass && npm run build"
   },
   "keywords": [],
   "author": "Denis Tivikov",
