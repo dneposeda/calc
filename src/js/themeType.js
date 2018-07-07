@@ -5,20 +5,26 @@
  * Функция меняет ширину калькулятора добавляя класс-модификатор и
  * изменяет стили в CSS 
  */
-    var changeThemeType = function(){
+var doc = document;
 
-        let calc = document.getElementById('calculator'),
-            keys = document.querySelectorAll('.key-engineering');
+var changeThemeType = function(){
 
-        calc.classList.toggle('calculator--width');
+    let calc = doc.getElementById('calculator'),
+        keys = doc.querySelectorAll('.key-engineering');
 
-        for (var i = 0; i < keys.length; i++){
-            keys[i].classList.toggle('key-engineering--none');
-        }
-        
-        
-        
-   
-    };
+    calc.classList.toggle('calculator--width');
 
-export default changeThemeType;
+    for (let i = 0; i < keys.length; i++){
+        keys[i].classList.toggle('key-engineering--none');
+    }
+
+};
+
+/* События на клик, смены типа калькулятора */
+var init = function(){
+    let btnChangeThemeType = doc.getElementById('btnChangeThemeEngineering');
+    btnChangeThemeType.addEventListener('click', changeThemeType);
+}
+
+
+export {init};

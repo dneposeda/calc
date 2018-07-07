@@ -112,15 +112,12 @@
 /*!******************************!*\
   !*** ./src/js/calculator.js ***!
   \******************************/
-/*! exports provided: pressKeyNumber, pressKeyOperation, pressKeyDot, pressKeyClear */
+/*! exports provided: init */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pressKeyNumber", function() { return pressKeyNumber; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pressKeyOperation", function() { return pressKeyOperation; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pressKeyDot", function() { return pressKeyDot; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pressKeyClear", function() { return pressKeyClear; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "init", function() { return init; });
 /* harmony import */ var _helper_operation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helper/operation */ "./src/js/helper/operation.js");
 
 
@@ -134,10 +131,45 @@ var doc = document,
 
 
 
+var init = function(){
+        
+    /* События на клик, ввод цифр */
+    let keyNumbers = doc.querySelectorAll('.keynumber');
+
+    for (let i = 0; i < keyNumbers.length; i++){
+        let keyNumber = keyNumbers[i];
+        keyNumber.addEventListener('click', function(e){
+            pressKeyNumber(e.target.textContent);
+        });
+    }
+
+
+    /* События на клик по операциям */
+    let keyOperations = doc.querySelectorAll('.keyoperations');
+
+    for (let i = 0; i<keyOperations.length; i++){
+        let keyOperation = keyOperations[i];
+        keyOperation.addEventListener('click', function(e){
+            pressKeyOperation(e.target.textContent);
+        });
+    }
+
+
+    /* События на клик, очистка калькулятора */
+    let keyAc = doc.getElementById('keyac');
+    keyAc.addEventListener('click', pressKeyClear);
+
+
+    /* События на клик, добавление точки */
+    let keyDot = doc.getElementById('keydot');
+    keyDot.addEventListener('click', pressKeyDot);
+}
+
+
 /**
  * Функция вывода цифр на экран
  */
-function pressKeyNumber(numb){
+var pressKeyNumber = function(numb){
 
     if (entryNewNumber){
         display.value = numb;
@@ -159,7 +191,7 @@ function pressKeyNumber(numb){
  */    
 function pressKeyOperation(symbol){
            
-    var localMemoryNumber = display.value;
+    let localMemoryNumber = display.value;
 
     if (entryNewNumber && memoryOperation !== '='){
         display.value = memoryCurrentNumber;
@@ -315,49 +347,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var doc = document;
 
 
-/* События на клик, смены цветовой темы */
-var btnChangeTheme = doc.getElementById('btnChangeTheme');
-btnChangeTheme.addEventListener('click', _themeColor__WEBPACK_IMPORTED_MODULE_2__["default"]);
+_themeColor__WEBPACK_IMPORTED_MODULE_2__["init"]();
 
+_themeType__WEBPACK_IMPORTED_MODULE_3__["init"]();
 
-/* События на клик, смены типа калькулятора */
-var btnChangeThemeType = doc.getElementById('btnChangeThemeEngineering');
-btnChangeThemeType.addEventListener('click', _themeType__WEBPACK_IMPORTED_MODULE_3__["default"]);
+_calculator__WEBPACK_IMPORTED_MODULE_4__["init"]();
 
-
-/* События на клик, ввод цифр */
-var keyNumbers = doc.querySelectorAll('.keynumber');
-
-for (let i = 0; i < keyNumbers.length; i++){
-    let keyNumber = keyNumbers[i];
-    keyNumber.addEventListener('click', function(e){
-        Object(_calculator__WEBPACK_IMPORTED_MODULE_4__["pressKeyNumber"])(e.target.textContent);
-    });
-}
-
-
-/* События на клик по операциям */
-var keyOperations = doc.querySelectorAll('.keyoperations');
-
-for (let i = 0; i<keyOperations.length; i++){
-    let keyOperation = keyOperations[i];
-    keyOperation.addEventListener('click', function(e){
-        Object(_calculator__WEBPACK_IMPORTED_MODULE_4__["pressKeyOperation"])(e.target.textContent);
-    });
-}
-
-
-/* События на клик, очистка калькулятора */
-var keyAc = doc.getElementById('keyac');
-keyAc.addEventListener('click', _calculator__WEBPACK_IMPORTED_MODULE_4__["pressKeyClear"]);
-
-
-/* События на клик, добавление точки */
-var keyDot = doc.getElementById('keydot');
-keyDot.addEventListener('click', _calculator__WEBPACK_IMPORTED_MODULE_4__["pressKeyDot"]);
 
 
 /***/ }),
@@ -366,11 +363,12 @@ keyDot.addEventListener('click', _calculator__WEBPACK_IMPORTED_MODULE_4__["press
 /*!******************************!*\
   !*** ./src/js/themeColor.js ***!
   \******************************/
-/*! exports provided: default */
+/*! exports provided: init */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "init", function() { return init; });
 
 
 /**
@@ -379,15 +377,24 @@ __webpack_require__.r(__webpack_exports__);
  * если класс есть убирает его, если нет добавляет.
  * По умолчание один из классов должен быть на элементе.
  */
-    var changeTheme = function(){
+var doc = document;
 
-        var calc = document.getElementById('calc');
-        calc.classList.toggle('dark');
-        calc.classList.toggle('light');
-   
-    };
+var changeTheme = function(){
 
-/* harmony default export */ __webpack_exports__["default"] = (changeTheme);
+    let calc = doc.getElementById('calc');
+    calc.classList.toggle('dark');
+    calc.classList.toggle('light');
+
+};
+
+/* События на клик, смены цветовой темы */
+var init = function() {
+    let btnChangeTheme = doc.getElementById('btnChangeTheme');
+    btnChangeTheme.addEventListener('click', changeTheme);
+}
+
+
+
 
 /***/ }),
 
@@ -395,11 +402,12 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************!*\
   !*** ./src/js/themeType.js ***!
   \*****************************/
-/*! exports provided: default */
+/*! exports provided: init */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "init", function() { return init; });
 
 
 /**
@@ -407,23 +415,29 @@ __webpack_require__.r(__webpack_exports__);
  * Функция меняет ширину калькулятора добавляя класс-модификатор и
  * изменяет стили в CSS 
  */
-    var changeThemeType = function(){
+var doc = document;
 
-        let calc = document.getElementById('calculator'),
-            keys = document.querySelectorAll('.key-engineering');
+var changeThemeType = function(){
 
-        calc.classList.toggle('calculator--width');
+    let calc = doc.getElementById('calculator'),
+        keys = doc.querySelectorAll('.key-engineering');
 
-        for (var i = 0; i < keys.length; i++){
-            keys[i].classList.toggle('key-engineering--none');
-        }
-        
-        
-        
-   
-    };
+    calc.classList.toggle('calculator--width');
 
-/* harmony default export */ __webpack_exports__["default"] = (changeThemeType);
+    for (let i = 0; i < keys.length; i++){
+        keys[i].classList.toggle('key-engineering--none');
+    }
+
+};
+
+/* События на клик, смены типа калькулятора */
+var init = function(){
+    let btnChangeThemeType = doc.getElementById('btnChangeThemeEngineering');
+    btnChangeThemeType.addEventListener('click', changeThemeType);
+}
+
+
+
 
 /***/ })
 

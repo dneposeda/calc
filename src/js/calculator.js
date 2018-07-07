@@ -9,10 +9,46 @@ var doc = document,
     entryNewNumber = false;
 
 
+
+var init = function(){
+        
+    /* События на клик, ввод цифр */
+    let keyNumbers = doc.querySelectorAll('.keynumber');
+
+    for (let i = 0; i < keyNumbers.length; i++){
+        let keyNumber = keyNumbers[i];
+        keyNumber.addEventListener('click', function(e){
+            pressKeyNumber(e.target.textContent);
+        });
+    }
+
+
+    /* События на клик по операциям */
+    let keyOperations = doc.querySelectorAll('.keyoperations');
+
+    for (let i = 0; i<keyOperations.length; i++){
+        let keyOperation = keyOperations[i];
+        keyOperation.addEventListener('click', function(e){
+            pressKeyOperation(e.target.textContent);
+        });
+    }
+
+
+    /* События на клик, очистка калькулятора */
+    let keyAc = doc.getElementById('keyac');
+    keyAc.addEventListener('click', pressKeyClear);
+
+
+    /* События на клик, добавление точки */
+    let keyDot = doc.getElementById('keydot');
+    keyDot.addEventListener('click', pressKeyDot);
+}
+
+
 /**
  * Функция вывода цифр на экран
  */
-function pressKeyNumber(numb){
+var pressKeyNumber = function(numb){
 
     if (entryNewNumber){
         display.value = numb;
@@ -34,7 +70,7 @@ function pressKeyNumber(numb){
  */    
 function pressKeyOperation(symbol){
            
-    var localMemoryNumber = display.value;
+    let localMemoryNumber = display.value;
 
     if (entryNewNumber && memoryOperation !== '='){
         display.value = memoryCurrentNumber;
@@ -97,6 +133,6 @@ function pressKeyClear(){
     
 };
 
-export {pressKeyNumber, pressKeyOperation, pressKeyDot, pressKeyClear};
+export {init};
 
 
