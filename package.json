@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "sass": "node-sass --source-map true \"src/sass/style.scss\" \"src/css/style.css\" ",
+    "sass": "node-sass \"src/sass/style.scss\" \"src/css/style.css\" ",
+    "sass:dev": "node-sass --source-map true \"src/sass/style.scss\" \"dist/css/style.css\" ",
     "sass:watch": "node-sass --watch --source-map true \"src/sass/style.scss\" \"dist/css/style.css\" ",
     "watch": "webpack --watch",
     "delete:dist": "rimraf -- dist .awcache",
     "server": "node server.js",
     "build": "webpack --mode production",
-    "build:dev": "npm run delete:dist && npm run sass && webpack --mode development",
+    "build:dev": "npm run delete:dist && npm run sass:dev && webpack --mode development",
     "build:prod": "npm run delete:dist && npm run sass && npm run build"
   },
   "keywords": [],

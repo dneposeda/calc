@@ -108,37 +108,35 @@
 
 /***/ }),
 
-/***/ "./src/js/index.js":
-/*!*************************!*\
-  !*** ./src/js/index.js ***!
-  \*************************/
-/*! no exports provided */
+/***/ "./src/js/calculator.js":
+/*!******************************!*\
+  !*** ./src/js/calculator.js ***!
+  \******************************/
+/*! exports provided: pressKeyNumber, pressKeyOperation, pressKeyDot, pressKeyClear */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var normalize_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! normalize.css */ "./node_modules/normalize.css/normalize.css");
-/* harmony import */ var normalize_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(normalize_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../css/style.css */ "./src/css/style.css");
-/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_css_style_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./theme */ "./src/js/theme.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pressKeyNumber", function() { return pressKeyNumber; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pressKeyOperation", function() { return pressKeyOperation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pressKeyDot", function() { return pressKeyDot; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pressKeyClear", function() { return pressKeyClear; });
+/* harmony import */ var _helper_operation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helper/operation */ "./src/js/helper/operation.js");
 
 
-
-
+ 
 
 var doc = document,
-    btnChengeTheme = doc.getElementById('btnChengeTheme'),
-    keyNumbers = doc.querySelectorAll('.keynumber'),
-    keyOperations = doc.querySelectorAll('.keyoperations'),
-    keyAc = doc.getElementById('keyac'),
-    keyDot = doc.getElementById('keydot'),
     display = doc.getElementById('display'),
     memoryCurrentNumber = 0,
     memoryOperation = '',
     entryNewNumber = false;
 
 
+
+/**
+ * Функция вывода цифр на экран
+ */
 function pressKeyNumber(numb){
 
     if (entryNewNumber){
@@ -151,15 +149,18 @@ function pressKeyNumber(numb){
             display.value += numb;
         };
     };
-    
+
 };
-
-
-
+    
+    
+/**
+ *
+ *  Функция отвечающия за операции
+ */    
 function pressKeyOperation(symbol){
-    
+           
     var localMemoryNumber = display.value;
-    
+
     if (entryNewNumber && memoryOperation !== '='){
         display.value = memoryCurrentNumber;
         memoryOperation = symbol;
@@ -167,16 +168,16 @@ function pressKeyOperation(symbol){
         entryNewNumber = true;
         switch(memoryOperation){
             case '+':
-                memoryCurrentNumber += parseFloat(localMemoryNumber);
+                memoryCurrentNumber = Object(_helper_operation__WEBPACK_IMPORTED_MODULE_0__["addition"])(memoryCurrentNumber, localMemoryNumber);
                 break;
             case '-':
-                memoryCurrentNumber -= parseFloat(localMemoryNumber);
+                memoryCurrentNumber = Object(_helper_operation__WEBPACK_IMPORTED_MODULE_0__["subtraction"])(memoryCurrentNumber, localMemoryNumber);
                 break;
             case '*':
-                memoryCurrentNumber *= parseFloat(localMemoryNumber);
+                memoryCurrentNumber = Object(_helper_operation__WEBPACK_IMPORTED_MODULE_0__["multiplication"])(memoryCurrentNumber, localMemoryNumber);
                 break;
             case '/':
-                memoryCurrentNumber /= parseFloat(localMemoryNumber);
+                memoryCurrentNumber = Object(_helper_operation__WEBPACK_IMPORTED_MODULE_0__["division"])(memoryCurrentNumber, localMemoryNumber);
                 break;
             default:
                 memoryCurrentNumber = parseFloat(localMemoryNumber);
@@ -192,7 +193,7 @@ function pressKeyOperation(symbol){
 /**
  * Функция точки, 
  */
-function pressKeyDot(dot){
+function pressKeyDot(){
 
     var localMemoryDot = display.value;
 
@@ -223,40 +224,148 @@ function pressKeyClear(){
 
 
 
-/* События на клик смены темы */
-btnChengeTheme.addEventListener('click', _theme__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
-/* События на клик по цифрам */
-for (var i = 0; i<keyNumbers.length; i++){
-    var keyNumber = keyNumbers[i];
-    keyNumber.addEventListener('click', function(e){
-        pressKeyNumber(e.target.textContent);
-    });
-}
-
-/* События на клик по операциям */
-for (var i = 0; i<keyOperations.length; i++){
-    var keyOperation = keyOperations[i];
-    keyOperation.addEventListener('click', function(e){
-        pressKeyOperation(e.target.textContent);
-    });
-}
-
-/* События на клик очистки */
-keyAc.addEventListener('click', pressKeyClear);
-
-/* События на клик точки */
-keyDot.addEventListener('click', function(e){
-    pressKeyDot(e.target.textContent);
-});
 
 
 /***/ }),
 
-/***/ "./src/js/theme.js":
+/***/ "./src/js/helper/operation.js":
+/*!************************************!*\
+  !*** ./src/js/helper/operation.js ***!
+  \************************************/
+/*! exports provided: addition, subtraction, multiplication, division */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addition", function() { return addition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subtraction", function() { return subtraction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "multiplication", function() { return multiplication; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "division", function() { return division; });
+
+  
+
+/**
+ *  (1+2)
+ * Функция сложения двух чисел.
+ * В функцию передается два числа, порядок не имеет значения.     * 
+ * Возращает результат от операции.
+ */
+var addition = function(numberOne, numberTwo){
+    let add = parseFloat(numberOne) + parseFloat(numberTwo);
+    return add;
+};
+
+/**
+ *  (1-2)
+ * Функция вычитания двух чисел.
+ * Из первого переданного числа вычитается второе переданное.
+ * Возращает результат от операции.
+ */
+var subtraction = function(numberOne, numberTwo){
+    let sub = parseFloat(numberOne) - parseFloat(numberTwo);
+    return sub;
+};
+
+/**
+ *  (1*2)
+ * Функция умножения, возращает произведение двух чисел.
+ */
+var multiplication = function(numberOne, numberTwo){
+    let mlp = parseFloat(numberOne) * parseFloat(numberTwo);
+    return mlp;
+};
+
+/**
+ *  (1/2)
+ * Функция деления, первое число делит на второе.
+ * Возращает результат от операции.
+ */
+var division = function(numberOne, numberTwo){
+    let dvsn = parseFloat(numberOne) / parseFloat(numberTwo);
+    return dvsn;
+};
+
+
+
+/***/ }),
+
+/***/ "./src/js/index.js":
 /*!*************************!*\
-  !*** ./src/js/theme.js ***!
+  !*** ./src/js/index.js ***!
   \*************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var normalize_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! normalize.css */ "./node_modules/normalize.css/normalize.css");
+/* harmony import */ var normalize_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(normalize_css__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../css/style.css */ "./src/css/style.css");
+/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_css_style_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _themeColor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./themeColor */ "./src/js/themeColor.js");
+/* harmony import */ var _themeType__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./themeType */ "./src/js/themeType.js");
+/* harmony import */ var _calculator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./calculator */ "./src/js/calculator.js");
+
+
+
+
+
+
+
+
+
+var doc = document;
+
+
+/* События на клик, смены цветовой темы */
+var btnChangeTheme = doc.getElementById('btnChangeTheme');
+btnChangeTheme.addEventListener('click', _themeColor__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+
+/* События на клик, смены типа калькулятора */
+var btnChangeThemeType = doc.getElementById('btnChangeThemeEngineering');
+btnChangeThemeType.addEventListener('click', _themeType__WEBPACK_IMPORTED_MODULE_3__["default"]);
+
+
+/* События на клик, ввод цифр */
+var keyNumbers = doc.querySelectorAll('.keynumber');
+
+for (let i = 0; i < keyNumbers.length; i++){
+    let keyNumber = keyNumbers[i];
+    keyNumber.addEventListener('click', function(e){
+        Object(_calculator__WEBPACK_IMPORTED_MODULE_4__["pressKeyNumber"])(e.target.textContent);
+    });
+}
+
+
+/* События на клик по операциям */
+var keyOperations = doc.querySelectorAll('.keyoperations');
+
+for (let i = 0; i<keyOperations.length; i++){
+    let keyOperation = keyOperations[i];
+    keyOperation.addEventListener('click', function(e){
+        Object(_calculator__WEBPACK_IMPORTED_MODULE_4__["pressKeyOperation"])(e.target.textContent);
+    });
+}
+
+
+/* События на клик, очистка калькулятора */
+var keyAc = doc.getElementById('keyac');
+keyAc.addEventListener('click', _calculator__WEBPACK_IMPORTED_MODULE_4__["pressKeyClear"]);
+
+
+/* События на клик, добавление точки */
+var keyDot = doc.getElementById('keydot');
+keyDot.addEventListener('click', _calculator__WEBPACK_IMPORTED_MODULE_4__["pressKeyDot"]);
+
+
+/***/ }),
+
+/***/ "./src/js/themeColor.js":
+/*!******************************!*\
+  !*** ./src/js/themeColor.js ***!
+  \******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -270,7 +379,7 @@ __webpack_require__.r(__webpack_exports__);
  * если класс есть убирает его, если нет добавляет.
  * По умолчание один из классов должен быть на элементе.
  */
-    var chengeTheme = function(){
+    var changeTheme = function(){
 
         var calc = document.getElementById('calc');
         calc.classList.toggle('dark');
@@ -278,7 +387,43 @@ __webpack_require__.r(__webpack_exports__);
    
     };
 
-/* harmony default export */ __webpack_exports__["default"] = (chengeTheme);
+/* harmony default export */ __webpack_exports__["default"] = (changeTheme);
+
+/***/ }),
+
+/***/ "./src/js/themeType.js":
+/*!*****************************!*\
+  !*** ./src/js/themeType.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+
+/**
+ * Смена режима калькулятора между простым и инженерным.
+ * Функция меняет ширину калькулятора добавляя класс-модификатор и
+ * изменяет стили в CSS 
+ */
+    var changeThemeType = function(){
+
+        let calc = document.getElementById('calculator'),
+            keys = document.querySelectorAll('.key-engineering');
+
+        calc.classList.toggle('calculator--width');
+
+        for (var i = 0; i < keys.length; i++){
+            keys[i].classList.toggle('key-engineering--none');
+        }
+        
+        
+        
+   
+    };
+
+/* harmony default export */ __webpack_exports__["default"] = (changeThemeType);
 
 /***/ })
 

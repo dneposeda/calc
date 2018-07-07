@@ -368,28 +368,28 @@ body {
   background-color: #e6e9eb;
   font-family: "oxygen", sans-serif; }
 
-.theme {
-  width: 260px;
-  margin: 0 auto 20px; }
+sup {
+  top: -0.8em;
+  font-size: 0.6em; }
 
 .calc {
-  width: 260px;
-  margin: 0 auto;
-  box-shadow: 0px 13px 69px -5px rgba(51, 51, 51, 0.61);
-  border-radius: 9px; }
+  box-shadow: 0px 13px 69px -5px rgba(51, 51, 51, 0.61); }
 
 .calc__display {
-  padding: 40px 20px;
-  text-align: right;
-  border-top-right-radius: 9px;
-  border-top-left-radius: 9px; }
+  padding: 27px 20px;
+  text-align: right; }
 
 .calc__total {
+  font-family: "oxygen", sans-serif;
   font-size: 30px;
   border: none;
   background: transparent;
   width: 220px;
   text-align: right; }
+  .calc__total--history {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 300; }
 
 .calc__intup-numb {
   font-size: 16px; }
@@ -402,9 +402,7 @@ body {
 
 .calc__keys {
   -webkit-transition: all 0.2s;
-  transition: all 0.2s;
-  border-bottom-right-radius: 9px;
-  border-bottom-left-radius: 9px; }
+  transition: all 0.2s; }
 
 .key {
   width: 65px;
@@ -414,6 +412,19 @@ body {
   cursor: pointer;
   -webkit-transition: background 0.2s;
   transition: background 0.2s; }
+
+.key-engineering {
+  display: block;
+  opacity: 1;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s; }
+  .key-engineering--none {
+    width: 0;
+    padding: 0;
+    opacity: 0;
+    -webkit-transform: scaleX(0);
+        -ms-transform: scaleX(0);
+            transform: scaleX(0); }
 
 .key--bg {
   font-size: 30px; }
@@ -426,7 +437,6 @@ body {
   font-size: 20px; }
 
 .key--zero {
-  border-bottom-left-radius: 9px;
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
@@ -434,17 +444,18 @@ body {
   text-align: left;
   padding-left: 25px; }
 
-.key--multiplication {
-  border-bottom-right-radius: 9px; }
-
 .key--total {
   font-size: 33px;
-  border-bottom-right-radius: 9px;
   -webkit-transition: background 0.2s;
   transition: background 0.2s; }
 
 .calculator {
-  margin-bottom: 150px; }
+  width: 260px;
+  margin: 30px auto 150px;
+  -webkit-transition: width 0.2s;
+  transition: width 0.2s; }
+  .calculator--width {
+    width: 325px; }
 
 .header {
   height: 86px;
@@ -556,48 +567,47 @@ body {
   background: linear-gradient(45deg, #df4794 0%, #f8b52c 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$pink', endColorstr='$orange',GradientType=1 ); }
 
-.theme__switch-input {
-  height: 0;
-  width: 0;
-  visibility: hidden; }
-
-.theme__switch-label {
-  cursor: pointer;
-  text-indent: -117px;
-  width: 60px;
-  height: 30px;
-  background: grey;
-  display: block;
-  border-radius: 15px;
-  position: relative;
-  line-height: 27px;
-  font-size: 18px;
-  font-family: 'Oxygen',sans-serif;
-  margin-left: auto; }
-  .theme__switch-label:after {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    border-radius: 10px;
-    -webkit-transition: 0.3s;
-    transition: 0.3s; }
-
-.theme__switch-input:checked + .theme__switch-label {
-  background: #bada55; }
-
-.theme__switch-input:checked + .theme__switch-label:after {
-  left: -webkit-calc(100% - 5px);
-  left: calc(100% - 5px);
-  -webkit-transform: translateX(-100%);
-      -ms-transform: translateX(-100%);
-          transform: translateX(-100%); }
-
-.theme__switch-label:active:after {
-  width: 50px; }
+.theme {
+  width: 210px; }
+  .theme__switch {
+    margin: 7px 0;
+    color: #f4f4f4; }
+    .theme__switch-input {
+      display: none; }
+      .theme__switch-input:checked + .theme__switch-label {
+        background: #bada55; }
+      .theme__switch-input:checked + .theme__switch-label:after {
+        left: -webkit-calc(100% - 5px);
+        left: calc(100% - 5px);
+        -webkit-transform: translateX(-100%);
+            -ms-transform: translateX(-100%);
+                transform: translateX(-100%); }
+    .theme__switch-label {
+      cursor: pointer;
+      text-indent: -117px;
+      width: 60px;
+      height: 30px;
+      background: grey;
+      display: block;
+      border-radius: 15px;
+      position: relative;
+      line-height: 27px;
+      font-size: 18px;
+      font-family: 'Oxygen',sans-serif;
+      margin-left: auto; }
+      .theme__switch-label:after {
+        content: '';
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        border-radius: 10px;
+        -webkit-transition: 0.3s;
+        transition: 0.3s; }
+      .theme__switch-label:active:after {
+        width: 50px; }
 
 .logo {
   display: -webkit-box;
