@@ -42,4 +42,48 @@ var division = function(numberOne, numberTwo){
     return dvsn;
 };
 
-export {addition, subtraction, multiplication, division};
+
+
+/**
+ *  (3!)
+ * Функция вычесления факториала.
+ * Возращает результат от операции.
+ */
+var factorial = function(numberOne){
+    let iteration = function(counter, accum){
+        if (counter === 1 || counter === 0) {
+            return accum;
+        } else {
+            return iteration(counter-1, counter * accum);
+        }   
+    }
+
+    return iteration(+numberOne, 1);
+};
+
+
+/**
+ *  (X в степени n)
+ * Функция возведения в степень. Используется стандартный функционал Math
+ * Возращает результат от операции.
+ */
+var exponentiation = function(numberOne, numberTwo){
+    let pow = Math.pow(numberOne, numberTwo);
+    return pow;
+};
+
+/**
+ *  (корень в степени n из X)
+ * Функция вычисления корня в n степени из x. Используется стандартный функционал Math
+ * Возращает результат от операции.
+ */
+var mathroot = function(numberOne, numberTwo){
+    let mrt = Math.pow(numberOne, 1/numberTwo);
+    return mrt;
+};
+
+
+
+
+
+export {addition, subtraction, multiplication, division, factorial, exponentiation, mathroot};

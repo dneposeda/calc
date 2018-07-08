@@ -146,11 +146,10 @@ var init = function(){
 
     /* События на клик по операциям */
     let keyOperations = doc.querySelectorAll('.keyoperations');
-
     for (let i = 0; i<keyOperations.length; i++){
         let keyOperation = keyOperations[i];
         keyOperation.addEventListener('click', function(e){
-            pressKeyOperation(e.target.textContent);
+            pressKeyOperation(e.target.textContent, e.target.value);
         });
     }
 
@@ -189,7 +188,7 @@ var pressKeyNumber = function(numb){
  *
  *  Функция отвечающия за операции
  */    
-function pressKeyOperation(symbol){
+function pressKeyOperation(symbol, nameSymbol){
            
     let localMemoryNumber = display.value;
 
@@ -197,26 +196,54 @@ function pressKeyOperation(symbol){
         display.value = memoryCurrentNumber;
         memoryOperation = symbol;
     } else {
-        entryNewNumber = true;
-        switch(memoryOperation){
-            case '+':
-                memoryCurrentNumber = Object(_helper_operation__WEBPACK_IMPORTED_MODULE_0__["addition"])(memoryCurrentNumber, localMemoryNumber);
-                break;
-            case '-':
-                memoryCurrentNumber = Object(_helper_operation__WEBPACK_IMPORTED_MODULE_0__["subtraction"])(memoryCurrentNumber, localMemoryNumber);
-                break;
-            case '*':
-                memoryCurrentNumber = Object(_helper_operation__WEBPACK_IMPORTED_MODULE_0__["multiplication"])(memoryCurrentNumber, localMemoryNumber);
-                break;
-            case '/':
-                memoryCurrentNumber = Object(_helper_operation__WEBPACK_IMPORTED_MODULE_0__["division"])(memoryCurrentNumber, localMemoryNumber);
-                break;
-            default:
-                memoryCurrentNumber = parseFloat(localMemoryNumber);
+        if (nameSymbol !== ''){
+            entryNewNumber = true;
+            switch(nameSymbol){
+                case 'log':
+                    memoryCurrentNumber = Math.log(localMemoryNumber);
+                    break;
+                case 'rootx':
+                    memoryCurrentNumber = Math.sqrt(localMemoryNumber);
+                    break;
+                case 'n!':
+                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["factorial"](localMemoryNumber);
+                    break;
+                default:
+                    memoryCurrentNumber = parseFloat(localMemoryNumber);
+            };
+
+            display.value = +memoryCurrentNumber.toFixed(10);
+            memoryOperation = nameSymbol;
+
+        } else{
+            entryNewNumber = true;
+            switch(memoryOperation){
+                case '+':
+                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["addition"](memoryCurrentNumber, localMemoryNumber);
+                    break;
+                case '-':
+                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["subtraction"](memoryCurrentNumber, localMemoryNumber);
+                    break;
+                case '*':
+                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["multiplication"](memoryCurrentNumber, localMemoryNumber);
+                    break;
+                case '/':
+                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["division"](memoryCurrentNumber, localMemoryNumber);
+                    break;
+                case 'xn':
+                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["exponentiation"](memoryCurrentNumber, localMemoryNumber);
+                    break;
+                case 'y√x':
+                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["mathroot"](memoryCurrentNumber, localMemoryNumber);
+                    break;
+                default:
+                    memoryCurrentNumber = parseFloat(localMemoryNumber);
+            };
+            
+            display.value = +memoryCurrentNumber.toFixed(10);
+            memoryOperation = symbol;
         };
         
-        display.value = +memoryCurrentNumber.toFixed(10);
-        memoryOperation = symbol;
     };
 
 };
@@ -265,7 +292,7 @@ function pressKeyClear(){
 /*!************************************!*\
   !*** ./src/js/helper/operation.js ***!
   \************************************/
-/*! exports provided: addition, subtraction, multiplication, division */
+/*! exports provided: addition, subtraction, multiplication, division, factorial, exponentiation, mathroot */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -274,6 +301,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subtraction", function() { return subtraction; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "multiplication", function() { return multiplication; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "division", function() { return division; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "factorial", function() { return factorial; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exponentiation", function() { return exponentiation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mathroot", function() { return mathroot; });
 
   
 
@@ -317,6 +347,50 @@ var division = function(numberOne, numberTwo){
     let dvsn = parseFloat(numberOne) / parseFloat(numberTwo);
     return dvsn;
 };
+
+
+
+/**
+ *  (3!)
+ * Функция вычесления факториала.
+ * Возращает результат от операции.
+ */
+var factorial = function(numberOne){
+    let iteration = function(counter, accum){
+        if (counter === 1 || counter === 0) {
+            return accum;
+        } else {
+            return iteration(counter-1, counter * accum);
+        }   
+    }
+
+    return iteration(+numberOne, 1);
+};
+
+
+/**
+ *  (X в степени n)
+ * Функция возведения в степень. Используется стандартный функционал Math
+ * Возращает результат от операции.
+ */
+var exponentiation = function(numberOne, numberTwo){
+    let pow = Math.pow(numberOne, numberTwo);
+    return pow;
+};
+
+/**
+ *  (корень в степени n из X)
+ * Функция вычисления корня в n степени из x. Используется стандартный функционал Math
+ * Возращает результат от операции.
+ */
+var mathroot = function(numberOne, numberTwo){
+    let mrt = Math.pow(numberOne, 1/numberTwo);
+    return mrt;
+};
+
+
+
+
 
 
 

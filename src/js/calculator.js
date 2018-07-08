@@ -1,6 +1,6 @@
 'use strict';
 
-import {addition, subtraction, multiplication, division} from './helper/operation'; 
+import * as operation from './helper/operation'; 
 
 var doc = document,
     display = doc.getElementById('display'),
@@ -25,11 +25,10 @@ var init = function(){
 
     /* События на клик по операциям */
     let keyOperations = doc.querySelectorAll('.keyoperations');
-
     for (let i = 0; i<keyOperations.length; i++){
         let keyOperation = keyOperations[i];
         keyOperation.addEventListener('click', function(e){
-            pressKeyOperation(e.target.textContent);
+            pressKeyOperation(e.target.textContent, e.target.value);
         });
     }
 
@@ -68,7 +67,7 @@ var pressKeyNumber = function(numb){
  *
  *  Функция отвечающия за операции
  */    
-function pressKeyOperation(symbol){
+function pressKeyOperation(symbol, nameSymbol){
            
     let localMemoryNumber = display.value;
 
@@ -76,26 +75,54 @@ function pressKeyOperation(symbol){
         display.value = memoryCurrentNumber;
         memoryOperation = symbol;
     } else {
-        entryNewNumber = true;
-        switch(memoryOperation){
-            case '+':
-                memoryCurrentNumber = addition(memoryCurrentNumber, localMemoryNumber);
-                break;
-            case '-':
-                memoryCurrentNumber = subtraction(memoryCurrentNumber, localMemoryNumber);
-                break;
-            case '*':
-                memoryCurrentNumber = multiplication(memoryCurrentNumber, localMemoryNumber);
-                break;
-            case '/':
-                memoryCurrentNumber = division(memoryCurrentNumber, localMemoryNumber);
-                break;
-            default:
-                memoryCurrentNumber = parseFloat(localMemoryNumber);
+        if (nameSymbol !== ''){
+            entryNewNumber = true;
+            switch(nameSymbol){
+                case 'log':
+                    memoryCurrentNumber = Math.log10(localMemoryNumber);
+                    break;
+                case 'rootx':
+                    memoryCurrentNumber = Math.sqrt(localMemoryNumber);
+                    break;
+                case 'n!':
+                    memoryCurrentNumber = operation.factorial(localMemoryNumber);
+                    break;
+                default:
+                    memoryCurrentNumber = parseFloat(localMemoryNumber);
+            };
+
+            display.value = +memoryCurrentNumber.toFixed(10);
+            memoryOperation = nameSymbol;
+
+        } else{
+            entryNewNumber = true;
+            switch(memoryOperation){
+                case '+':
+                    memoryCurrentNumber = operation.addition(memoryCurrentNumber, localMemoryNumber);
+                    break;
+                case '-':
+                    memoryCurrentNumber = operation.subtraction(memoryCurrentNumber, localMemoryNumber);
+                    break;
+                case '*':
+                    memoryCurrentNumber = operation.multiplication(memoryCurrentNumber, localMemoryNumber);
+                    break;
+                case '/':
+                    memoryCurrentNumber = operation.division(memoryCurrentNumber, localMemoryNumber);
+                    break;
+                case 'xn':
+                    memoryCurrentNumber = operation.exponentiation(memoryCurrentNumber, localMemoryNumber);
+                    break;
+                case 'y√x':
+                    memoryCurrentNumber = operation.mathroot(memoryCurrentNumber, localMemoryNumber);
+                    break;
+                default:
+                    memoryCurrentNumber = parseFloat(localMemoryNumber);
+            };
+            
+            display.value = +memoryCurrentNumber.toFixed(10);
+            memoryOperation = symbol;
         };
         
-        display.value = +memoryCurrentNumber.toFixed(10);
-        memoryOperation = symbol;
     };
 
 };
