@@ -12,7 +12,7 @@ var doc = document,
 
 var init = function(){
         
-    /* События на клик, ввод цифр */
+    // События на клик, ввод цифр 
     let keyNumbers = doc.querySelectorAll('.keynumber');
 
     for (let i = 0; i < keyNumbers.length; i++){
@@ -23,30 +23,28 @@ var init = function(){
     }
 
 
-    /* События на клик по операциям */
+    // События на клик по операциям 
     let keyOperations = doc.querySelectorAll('.keyoperations');
     for (let i = 0; i<keyOperations.length; i++){
         let keyOperation = keyOperations[i];
-        keyOperation.addEventListener('click', function(e){
-            pressKeyOperation(e.target.textContent, e.target.value);
-        });
+        keyOperation.addEventListener('click', operationAction);
     }
 
 
-    /* События на клик, очистка калькулятора */
+    // События на клик, очистка калькулятора 
     let keyAc = doc.getElementById('keyac');
     keyAc.addEventListener('click', pressKeyClear);
 
 
-    /* События на клик, добавление точки */
+    // События на клик, добавление точки 
     let keyDot = doc.getElementById('keydot');
     keyDot.addEventListener('click', pressKeyDot);
 }
 
 
-/**
- * Функция вывода цифр на экран
- */
+
+// Функция вывода цифр на экран
+
 var pressKeyNumber = function(numb){
 
     if (entryNewNumber){
@@ -63,13 +61,14 @@ var pressKeyNumber = function(numb){
 };
     
     
-/**
- *
- *  Функция отвечающия за операции
- */    
-function pressKeyOperation(symbol, nameSymbol){
+// Функция отвечающия за операции
+   
+function operationAction(clickEvent){
            
-    let localMemoryNumber = display.value;
+     
+    let localMemoryNumber = display.value,
+        symbol = clickEvent.target.textContent,
+        nameSymbol = clickEvent.target.value;
 
     if (entryNewNumber && memoryOperation !== '='){
         display.value = memoryCurrentNumber;
@@ -128,9 +127,9 @@ function pressKeyOperation(symbol, nameSymbol){
 };
 
 
-/**
- * Функция точки, 
- */
+
+// Функция точки, 
+
 function pressKeyDot(){
 
     var localMemoryDot = display.value;
@@ -149,9 +148,9 @@ function pressKeyDot(){
 };
 
 
-/**
- * Функция полной очистки значений калькулятора
- */
+
+// Функция полной очистки значений калькулятора
+
 function pressKeyClear(){
     display.value = 0;
     memoryCurrentNumber = 0;

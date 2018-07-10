@@ -30,6 +30,20 @@ sup {
   top: -0.8em;
   font-size: 0.6em; }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; }
+  .wrapper-content {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0%; }
+
+.main-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
+
 .calc {
   box-shadow: 0px 13px 69px -5px rgba(51, 51, 51, 0.61); }
 
@@ -97,7 +111,7 @@ sup {
 
 .calculator {
   width: 260px;
-  margin: 30px auto 150px;
+  margin: 30px 50px 70px;
   transition: width 0.2s; }
   .calculator--width {
     width: 325px; }
@@ -113,12 +127,14 @@ sup {
 
 .footer {
   max-width: 700px;
+  width: 100%;
   height: 90px;
   margin: 0 auto;
   border-top: 1px solid #464553;
   display: flex;
   justify-content: space-between;
-  align-items: center; }
+  align-items: center;
+  padding: 0 10px; }
   .footer__copyright {
     line-height: 1.5;
     color: #001b2a; }
@@ -130,6 +146,12 @@ sup {
     .footer__link:hover {
       color: #ec805f;
       border-bottom-color: #ec805f; }
+
+.dark .theme {
+  background-color: #3a4868; }
+
+.dark .theme__switch {
+  color: #f4f4f4; }
 
 .dark .calc__keys {
   background-color: #3a4868; }
@@ -194,10 +216,11 @@ sup {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$pink', endColorstr='$orange',GradientType=1 ); }
 
 .theme {
-  width: 210px; }
+  padding: 10px;
+  background-color: #f4f4f4; }
   .theme__switch {
     margin: 7px 0;
-    color: #f4f4f4; }
+    color: #001b2a; }
     .theme__switch-input {
       display: none; }
       .theme__switch-input:checked + .theme__switch-label {
@@ -207,29 +230,29 @@ sup {
         transform: translateX(-100%); }
     .theme__switch-label {
       cursor: pointer;
-      text-indent: -117px;
-      width: 60px;
-      height: 30px;
+      text-indent: -106px;
+      width: 40px;
+      height: 20px;
       background: grey;
       display: block;
-      border-radius: 15px;
+      border-radius: 10px;
       position: relative;
-      line-height: 27px;
-      font-size: 18px;
+      line-height: 16px;
+      font-size: 16px;
       font-family: 'Oxygen',sans-serif;
       margin-left: auto; }
       .theme__switch-label:after {
         content: '';
         position: absolute;
-        top: 5px;
-        left: 5px;
-        width: 20px;
-        height: 20px;
+        top: 4px;
+        left: 4px;
+        width: 12px;
+        height: 12px;
         background: #fff;
-        border-radius: 10px;
+        border-radius: 50%;
         transition: 0.3s; }
       .theme__switch-label:active:after {
-        width: 50px; }
+        width: 30px; }
 
 .logo {
   display: flex;

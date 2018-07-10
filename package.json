@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "sass": "node-sass \"src/sass/style.scss\" \"src/css/style.css\" ",
-    "sass:dev": "node-sass --source-map true \"src/sass/style.scss\" \"dist/css/style.css\" ",
+    "sass:dev": "node-sass --source-map true \"src/sass/style.scss\" \"src/css/style.css\" ",
     "sass:watch": "node-sass --watch --source-map true \"src/sass/style.scss\" \"dist/css/style.css\" ",
     "watch": "webpack --watch",
     "delete:dist": "rimraf -- dist .awcache",

@@ -1,14 +1,14 @@
-@import "variables/colors.scss";
-@import "variables/fonts.scss";
+// variables
+@import "variables/index.scss";
 
+// layout
 @import "layout/main.scss";
 
-@import "sections/header.scss";
-@import "sections/footer.scss";
+// section
+@import "sections/index.scss";
 
-@import "theme/theme-dark.scss";
-@import "theme/theme-light.scss";
+// theme
+@import "theme/index.scss";
 
-@import "components/switch.scss";
-@import "components/logo.scss";
-@import "components/social.scss";
+// components
+@import "components/index.scss";
