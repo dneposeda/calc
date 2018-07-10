@@ -108,17 +108,17 @@
 
 /***/ }),
 
-/***/ "./src/js/calculator.js":
-/*!******************************!*\
-  !*** ./src/js/calculator.js ***!
-  \******************************/
+/***/ "./src/js/calculator/calculator.js":
+/*!*****************************************!*\
+  !*** ./src/js/calculator/calculator.js ***!
+  \*****************************************/
 /*! exports provided: init */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "init", function() { return init; });
-/* harmony import */ var _helper_operation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helper/operation */ "./src/js/helper/operation.js");
+/* harmony import */ var _helpers_operation__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/operation */ "./src/js/calculator/helpers/operation.js");
 
 
  
@@ -200,13 +200,13 @@ function pressKeyOperation(symbol, nameSymbol){
             entryNewNumber = true;
             switch(nameSymbol){
                 case 'log':
-                    memoryCurrentNumber = Math.log(localMemoryNumber);
+                    memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_0__["default"].log(localMemoryNumber);
                     break;
                 case 'rootx':
-                    memoryCurrentNumber = Math.sqrt(localMemoryNumber);
+                    memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_0__["default"].sqrt(localMemoryNumber);
                     break;
                 case 'n!':
-                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["factorial"](localMemoryNumber);
+                    memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_0__["default"].factorial(localMemoryNumber);
                     break;
                 default:
                     memoryCurrentNumber = parseFloat(localMemoryNumber);
@@ -219,22 +219,22 @@ function pressKeyOperation(symbol, nameSymbol){
             entryNewNumber = true;
             switch(memoryOperation){
                 case '+':
-                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["addition"](memoryCurrentNumber, localMemoryNumber);
+                    memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_0__["default"].addition(memoryCurrentNumber, localMemoryNumber);
                     break;
                 case '-':
-                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["subtraction"](memoryCurrentNumber, localMemoryNumber);
+                    memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_0__["default"].subtraction(memoryCurrentNumber, localMemoryNumber);
                     break;
                 case '*':
-                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["multiplication"](memoryCurrentNumber, localMemoryNumber);
+                    memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_0__["default"].multiplication(memoryCurrentNumber, localMemoryNumber);
                     break;
                 case '/':
-                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["division"](memoryCurrentNumber, localMemoryNumber);
+                    memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_0__["default"].division(memoryCurrentNumber, localMemoryNumber);
                     break;
                 case 'xn':
-                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["exponentiation"](memoryCurrentNumber, localMemoryNumber);
+                    memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_0__["default"].exponentiation(memoryCurrentNumber, localMemoryNumber);
                     break;
                 case 'y√x':
-                    memoryCurrentNumber = _helper_operation__WEBPACK_IMPORTED_MODULE_0__["mathroot"](memoryCurrentNumber, localMemoryNumber);
+                    memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_0__["default"].mathroot(memoryCurrentNumber, localMemoryNumber);
                     break;
                 default:
                     memoryCurrentNumber = parseFloat(localMemoryNumber);
@@ -288,111 +288,126 @@ function pressKeyClear(){
 
 /***/ }),
 
-/***/ "./src/js/helper/operation.js":
-/*!************************************!*\
-  !*** ./src/js/helper/operation.js ***!
-  \************************************/
-/*! exports provided: addition, subtraction, multiplication, division, factorial, exponentiation, mathroot */
+/***/ "./src/js/calculator/helpers/operation.js":
+/*!************************************************!*\
+  !*** ./src/js/calculator/helpers/operation.js ***!
+  \************************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addition", function() { return addition; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "subtraction", function() { return subtraction; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "multiplication", function() { return multiplication; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "division", function() { return division; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "factorial", function() { return factorial; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "exponentiation", function() { return exponentiation; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mathroot", function() { return mathroot; });
 
   
+var operations = {
+    /**
+     *  (1+2)
+     * Функция сложения двух чисел.
+     * В функцию передается два числа, порядок не имеет значения.     * 
+     * Возращает результат от операции.
+     */
+    addition: function(numberOne, numberTwo){
+        let add = parseFloat(numberOne) + parseFloat(numberTwo);
+        return add;
+    },
 
-/**
- *  (1+2)
- * Функция сложения двух чисел.
- * В функцию передается два числа, порядок не имеет значения.     * 
- * Возращает результат от операции.
- */
-var addition = function(numberOne, numberTwo){
-    let add = parseFloat(numberOne) + parseFloat(numberTwo);
-    return add;
-};
+    /**
+     *  (1-2)
+     * Функция вычитания двух чисел.
+     * Из первого переданного числа вычитается второе переданное.
+     * Возращает результат от операции.
+     */
+    subtraction: function(numberOne, numberTwo){
+        let sub = parseFloat(numberOne) - parseFloat(numberTwo);
+        return sub;
+    },
 
-/**
- *  (1-2)
- * Функция вычитания двух чисел.
- * Из первого переданного числа вычитается второе переданное.
- * Возращает результат от операции.
- */
-var subtraction = function(numberOne, numberTwo){
-    let sub = parseFloat(numberOne) - parseFloat(numberTwo);
-    return sub;
-};
+    /**
+     *  (1*2)
+     * Функция умножения, возращает произведение двух чисел.
+     */
+    multiplication: function(numberOne, numberTwo){
+        let mlp = parseFloat(numberOne) * parseFloat(numberTwo);
+        return mlp;
+    },
 
-/**
- *  (1*2)
- * Функция умножения, возращает произведение двух чисел.
- */
-var multiplication = function(numberOne, numberTwo){
-    let mlp = parseFloat(numberOne) * parseFloat(numberTwo);
-    return mlp;
-};
-
-/**
- *  (1/2)
- * Функция деления, первое число делит на второе.
- * Возращает результат от операции.
- */
-var division = function(numberOne, numberTwo){
-    let dvsn = parseFloat(numberOne) / parseFloat(numberTwo);
-    return dvsn;
-};
-
-
-
-/**
- *  (3!)
- * Функция вычесления факториала.
- * Возращает результат от операции.
- */
-var factorial = function(numberOne){
-    let iteration = function(counter, accum){
-        if (counter === 1 || counter === 0) {
-            return accum;
-        } else {
-            return iteration(counter-1, counter * accum);
-        }   
-    }
-
-    return iteration(+numberOne, 1);
-};
-
-
-/**
- *  (X в степени n)
- * Функция возведения в степень. Используется стандартный функционал Math
- * Возращает результат от операции.
- */
-var exponentiation = function(numberOne, numberTwo){
-    let pow = Math.pow(numberOne, numberTwo);
-    return pow;
-};
-
-/**
- *  (корень в степени n из X)
- * Функция вычисления корня в n степени из x. Используется стандартный функционал Math
- * Возращает результат от операции.
- */
-var mathroot = function(numberOne, numberTwo){
-    let mrt = Math.pow(numberOne, 1/numberTwo);
-    return mrt;
-};
+    /**
+     *  (1/2)
+     * Функция деления, первое число делит на второе.
+     * Возращает результат от операции.
+     */
+    division: function(numberOne, numberTwo){
+        let dvsn = parseFloat(numberOne) / parseFloat(numberTwo);
+        return dvsn;
+    },
 
 
 
+    /**
+     *  (3!)
+     * Функция вычесления факториала.
+     * Возращает результат от операции.
+     */
+    factorial: function(numberOne){
+        let iteration = function(counter, accum){
+            if (counter === 1 || counter === 0) {
+                return accum;
+            } else {
+                return iteration(counter-1, counter * accum);
+            }   
+        }
+
+        return iteration(+numberOne, 1);
+    },
+
+
+    /**
+     *  (X в степени n)
+     * Функция возведения в степень. Используется стандартный функционал Math
+     * Возращает результат от операции.
+     */
+    exponentiation: function(numberOne, numberTwo){
+        let pow = Math.pow(numberOne, numberTwo);
+        return pow;
+    },
+
+    /**
+     *  (корень в степени n из X)
+     * Функция вычисления корня в n степени из x. Используется стандартный функционал Math
+     * Возращает результат от операции.
+     */
+    mathroot: function(numberOne, numberTwo){
+        let mrt = Math.pow(numberOne, 1/numberTwo);
+        return mrt;
+    },
+
+    /**
+     *  (логорифм из X)
+     * Функция вычисления логорифм из числа x. Используется стандартный функционал Math
+     * Возращает результат от операции.
+     */
+    log: function(numberOne){
+        let log = Math.log10(numberOne);
+        return log;
+    },
+
+        /**
+     *  (логорифм из X)
+     * Функция вычисления логорифм из числа x. Используется стандартный функционал Math
+     * Возращает результат от операции.
+     */
+    sqrt: function(numberOne){
+        let sqrt = Math.sqrt(numberOne);
+        return sqrt;
+    },
+}
 
 
 
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = (operations);
 
 /***/ }),
 
@@ -409,9 +424,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var normalize_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(normalize_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../css/style.css */ "./src/css/style.css");
 /* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_css_style_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _themeColor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./themeColor */ "./src/js/themeColor.js");
-/* harmony import */ var _themeType__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./themeType */ "./src/js/themeType.js");
-/* harmony import */ var _calculator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./calculator */ "./src/js/calculator.js");
+/* harmony import */ var _theming_themeColor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./theming/themeColor */ "./src/js/theming/themeColor.js");
+/* harmony import */ var _theming_themeType__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./theming/themeType */ "./src/js/theming/themeType.js");
+/* harmony import */ var _calculator_calculator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./calculator/calculator */ "./src/js/calculator/calculator.js");
 
 
 
@@ -423,20 +438,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_themeColor__WEBPACK_IMPORTED_MODULE_2__["init"]();
+_theming_themeColor__WEBPACK_IMPORTED_MODULE_2__["init"]();
 
-_themeType__WEBPACK_IMPORTED_MODULE_3__["init"]();
+_theming_themeType__WEBPACK_IMPORTED_MODULE_3__["init"]();
 
-_calculator__WEBPACK_IMPORTED_MODULE_4__["init"]();
+_calculator_calculator__WEBPACK_IMPORTED_MODULE_4__["init"]();
 
 
 
 /***/ }),
 
-/***/ "./src/js/themeColor.js":
-/*!******************************!*\
-  !*** ./src/js/themeColor.js ***!
-  \******************************/
+/***/ "./src/js/theming/themeColor.js":
+/*!**************************************!*\
+  !*** ./src/js/theming/themeColor.js ***!
+  \**************************************/
 /*! exports provided: init */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -472,10 +487,10 @@ var init = function() {
 
 /***/ }),
 
-/***/ "./src/js/themeType.js":
-/*!*****************************!*\
-  !*** ./src/js/themeType.js ***!
-  \*****************************/
+/***/ "./src/js/theming/themeType.js":
+/*!*************************************!*\
+  !*** ./src/js/theming/themeType.js ***!
+  \*************************************/
 /*! exports provided: init */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 

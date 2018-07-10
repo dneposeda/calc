@@ -1,6 +1,6 @@
 'use strict';
 
-import * as operation from './helper/operation'; 
+import operations from './helpers/operation'; 
 
 var doc = document,
     display = doc.getElementById('display'),
@@ -79,13 +79,13 @@ function pressKeyOperation(symbol, nameSymbol){
             entryNewNumber = true;
             switch(nameSymbol){
                 case 'log':
-                    memoryCurrentNumber = Math.log10(localMemoryNumber);
+                    memoryCurrentNumber = operations.log(localMemoryNumber);
                     break;
                 case 'rootx':
-                    memoryCurrentNumber = Math.sqrt(localMemoryNumber);
+                    memoryCurrentNumber = operations.sqrt(localMemoryNumber);
                     break;
                 case 'n!':
-                    memoryCurrentNumber = operation.factorial(localMemoryNumber);
+                    memoryCurrentNumber = operations.factorial(localMemoryNumber);
                     break;
                 default:
                     memoryCurrentNumber = parseFloat(localMemoryNumber);
@@ -98,22 +98,22 @@ function pressKeyOperation(symbol, nameSymbol){
             entryNewNumber = true;
             switch(memoryOperation){
                 case '+':
-                    memoryCurrentNumber = operation.addition(memoryCurrentNumber, localMemoryNumber);
+                    memoryCurrentNumber = operations.addition(memoryCurrentNumber, localMemoryNumber);
                     break;
                 case '-':
-                    memoryCurrentNumber = operation.subtraction(memoryCurrentNumber, localMemoryNumber);
+                    memoryCurrentNumber = operations.subtraction(memoryCurrentNumber, localMemoryNumber);
                     break;
                 case '*':
-                    memoryCurrentNumber = operation.multiplication(memoryCurrentNumber, localMemoryNumber);
+                    memoryCurrentNumber = operations.multiplication(memoryCurrentNumber, localMemoryNumber);
                     break;
                 case '/':
-                    memoryCurrentNumber = operation.division(memoryCurrentNumber, localMemoryNumber);
+                    memoryCurrentNumber = operations.division(memoryCurrentNumber, localMemoryNumber);
                     break;
                 case 'xn':
-                    memoryCurrentNumber = operation.exponentiation(memoryCurrentNumber, localMemoryNumber);
+                    memoryCurrentNumber = operations.exponentiation(memoryCurrentNumber, localMemoryNumber);
                     break;
                 case 'y√x':
-                    memoryCurrentNumber = operation.mathroot(memoryCurrentNumber, localMemoryNumber);
+                    memoryCurrentNumber = operations.mathroot(memoryCurrentNumber, localMemoryNumber);
                     break;
                 default:
                     memoryCurrentNumber = parseFloat(localMemoryNumber);
