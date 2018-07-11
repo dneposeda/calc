@@ -10,6 +10,8 @@ function Calc(id) {
     var doc = document,
         elem = doc.querySelector(id),
         display = elem.querySelector('.display'),
+        historyDisplay = elem.querySelector('.displayHistory'),
+        historyNumber = '',
         memoryCurrentNumber = 0,
         memoryOperation = '',
         entryNewNumber = false;
@@ -26,9 +28,7 @@ function Calc(id) {
         let keyNumbers = elem.querySelectorAll('.keynumber');
         for (let i = 0; i < keyNumbers.length; i++){
             let keyNumber = keyNumbers[i];
-            keyNumber.addEventListener('click', function(e){
-                pressKeyNumber(e.target.textContent);
-            });
+            keyNumber.addEventListener('click', pressKeyNumber);
         }
     
     
@@ -54,18 +54,25 @@ function Calc(id) {
     
     // Функция вывода цифр на экран
     
-    var pressKeyNumber = function(numb){
-    
+    var pressKeyNumber = function(clickEvent){
+
+        let numb = clickEvent.target.textContent;
+
         if (entryNewNumber){
             display.value = numb;
+            historyDisplay.value += display.value;
             entryNewNumber = false;
         } else {
             if (display.value === '0'){
                 display.value = numb;
+                historyDisplay.value = display.value;
             } else {
                 display.value += numb;
+                historyDisplay.value += numb;
             };
         };
+
+        console.log(historyNumber);
     
     };
         
@@ -86,6 +93,8 @@ function Calc(id) {
         };
 
         display.value = localMemoryDot;
+        historyNumber = display.value;
+        historyDisplay.value = historyNumber;
 
     };
 
@@ -93,12 +102,11 @@ function Calc(id) {
     // Функция отвечающия за операции
        
     var operationAction = function (clickEvent){
-               
          
         let localMemoryNumber = display.value,
             symbol = clickEvent.target.textContent,
             nameSymbol = clickEvent.target.value;
-    
+        
         if (entryNewNumber && memoryOperation !== '='){
             display.value = memoryCurrentNumber;
             memoryOperation = symbol;
@@ -121,6 +129,7 @@ function Calc(id) {
     
                 display.value = +memoryCurrentNumber.toFixed(10);
                 memoryOperation = nameSymbol;
+                
     
             } else{
                 entryNewNumber = true;
@@ -149,6 +158,12 @@ function Calc(id) {
                 
                 display.value = +memoryCurrentNumber.toFixed(10);
                 memoryOperation = symbol;
+
+                if (memoryOperation !== '=') {
+                    historyDisplay.value += memoryOperation;
+                }
+                 
+
             };
             
         };
@@ -159,6 +174,8 @@ function Calc(id) {
 
     var pressKeyClear = function (){
         display.value = 0;
+        historyDisplay.value = '';
+        historyNumber = '';
         memoryCurrentNumber = 0;
         memoryOperation = '';
         entryNewNumber = true;
