@@ -2,16 +2,12 @@
 
 import 'normalize.css';
 import '../css/style.css';
-import * as changeTheme from './theming/themeColor';
-import * as changeThemeType from './theming/themeType';
-import * as pressKey from './calculator/calculator';
+import Calc from './calculator/calculator';
 
+// changeThemeType.init();
 
+var calc = new Calc('#calculator');
+calc.init();
 
-
-changeTheme.init();
-
-changeThemeType.init();
-
-pressKey.init();
-
+var calc2 = new Calc('#calculator2');
+calc2.init();
