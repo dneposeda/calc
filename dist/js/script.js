@@ -129,13 +129,10 @@ var doc = document,
     memoryOperation = '',
     entryNewNumber = false;
 
-
-
 var init = function(){
-        
+       
     // События на клик, ввод цифр 
     let keyNumbers = doc.querySelectorAll('.keynumber');
-
     for (let i = 0; i < keyNumbers.length; i++){
         let keyNumber = keyNumbers[i];
         keyNumber.addEventListener('click', function(e){
