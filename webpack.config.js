@@ -17,6 +17,17 @@ var clientConfig = (function webpackConfig(){
   config.module = {
     rules: [
       {
+        test: /\.js$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['env']
+            }
+          }
+        ]
+      },
+      {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,

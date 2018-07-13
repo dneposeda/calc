@@ -112,20 +112,29 @@
 /*!*****************************************!*\
   !*** ./src/js/calculator/calculator.js ***!
   \*****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _theming_themeColor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./theming/themeColor */ "./src/js/calculator/theming/themeColor.js");
-/* harmony import */ var _theming_themeType__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./theming/themeType */ "./src/js/calculator/theming/themeType.js");
-/* harmony import */ var _helpers_operation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./helpers/operation */ "./src/js/calculator/helpers/operation.js");
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
+var _themeColor = __webpack_require__(/*! ./theming/themeColor */ "./src/js/calculator/theming/themeColor.js");
 
- 
+var _themeColor2 = _interopRequireDefault(_themeColor);
 
+var _themeType = __webpack_require__(/*! ./theming/themeType */ "./src/js/calculator/theming/themeType.js");
+
+var _themeType2 = _interopRequireDefault(_themeType);
+
+var _operation = __webpack_require__(/*! ./helpers/operation */ "./src/js/calculator/helpers/operation.js");
+
+var _operation2 = _interopRequireDefault(_operation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Calc(id) {
 
@@ -138,54 +147,49 @@ function Calc(id) {
         memoryOperation = '',
         entryNewNumber = false;
 
-    var changeTheme = new _theming_themeColor__WEBPACK_IMPORTED_MODULE_0__["default"](id);
+    var changeTheme = new _themeColor2.default(id);
     changeTheme.init();
 
-    var changeThemeType = new _theming_themeType__WEBPACK_IMPORTED_MODULE_1__["default"](id);
+    var changeThemeType = new _themeType2.default(id);
     changeThemeType.init();
-    
-    this.init = function(){
-       
+
+    this.init = function () {
+
         // События на клик, ввод цифр 
-        let keyNumbers = elem.querySelectorAll('.keynumber');
-        for (let i = 0; i < keyNumbers.length; i++){
-            let keyNumber = keyNumbers[i];
+        var keyNumbers = elem.querySelectorAll('.keynumber');
+        for (var i = 0; i < keyNumbers.length; i++) {
+            var keyNumber = keyNumbers[i];
             keyNumber.addEventListener('click', pressKeyNumber);
         }
-    
-    
+
         // События на клик по операциям 
-        let keyOperations = elem.querySelectorAll('.keyoperations');
-        for (let i = 0; i<keyOperations.length; i++){
-            let keyOperation = keyOperations[i];
+        var keyOperations = elem.querySelectorAll('.keyoperations');
+        for (var _i = 0; _i < keyOperations.length; _i++) {
+            var keyOperation = keyOperations[_i];
             keyOperation.addEventListener('click', operationAction);
         }
-    
-    
+
         // События на клик, очистка калькулятора 
-        let keyAc = elem.querySelector('.keyac');
+        var keyAc = elem.querySelector('.keyac');
         keyAc.addEventListener('click', pressKeyClear);
-    
-    
+
         // События на клик, добавление точки 
-        let keyDot = elem.querySelector('.keydot');
+        var keyDot = elem.querySelector('.keydot');
         keyDot.addEventListener('click', pressKeyDot);
-    }
-    
-    
-    
+    };
+
     // Функция вывода цифр на экран
-    
-    var pressKeyNumber = function(clickEvent){
 
-        let numb = clickEvent.target.textContent;
+    var pressKeyNumber = function pressKeyNumber(clickEvent) {
 
-        if (entryNewNumber){
+        var numb = clickEvent.target.textContent;
+
+        if (entryNewNumber) {
             display.value = numb;
             historyDisplay.value += display.value;
             entryNewNumber = false;
         } else {
-            if (display.value === '0'){
+            if (display.value === '0') {
                 display.value = numb;
                 historyDisplay.value = display.value;
             } else {
@@ -195,21 +199,19 @@ function Calc(id) {
         };
 
         console.log(historyNumber);
-    
     };
-        
 
     // Функция точки, 
 
-    var pressKeyDot = function pressKeyDot(){
+    var pressKeyDot = function pressKeyDot() {
 
         var localMemoryDot = display.value;
 
-        if (entryNewNumber){
+        if (entryNewNumber) {
             localMemoryDot = '0.';
             entryNewNumber = false;
         } else {
-            if (localMemoryDot.indexOf('.') === -1){
+            if (localMemoryDot.indexOf('.') === -1) {
                 localMemoryDot += '.';
             };
         };
@@ -217,96 +219,86 @@ function Calc(id) {
         display.value = localMemoryDot;
         historyNumber = display.value;
         historyDisplay.value = historyNumber;
-
     };
 
-
     // Функция отвечающия за операции
-       
-    var operationAction = function (clickEvent){
-         
-        let localMemoryNumber = display.value,
+
+    var operationAction = function operationAction(clickEvent) {
+
+        var localMemoryNumber = display.value,
             symbol = clickEvent.target.textContent,
             nameSymbol = clickEvent.target.value;
-        
-        if (entryNewNumber && memoryOperation !== '='){
+
+        if (entryNewNumber && memoryOperation !== '=') {
             display.value = memoryCurrentNumber;
             memoryOperation = symbol;
         } else {
-            if (nameSymbol !== ''){
+            if (nameSymbol !== '') {
                 entryNewNumber = true;
-                switch(nameSymbol){
+                switch (nameSymbol) {
                     case 'log':
-                        memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_2__["default"].log(localMemoryNumber);
+                        memoryCurrentNumber = _operation2.default.log(localMemoryNumber);
                         break;
                     case 'rootx':
-                        memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_2__["default"].sqrt(localMemoryNumber);
+                        memoryCurrentNumber = _operation2.default.sqrt(localMemoryNumber);
                         break;
                     case 'n!':
-                        memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_2__["default"].factorial(localMemoryNumber);
+                        memoryCurrentNumber = _operation2.default.factorial(localMemoryNumber);
                         break;
                     default:
                         memoryCurrentNumber = parseFloat(localMemoryNumber);
                 };
-    
+
                 display.value = +memoryCurrentNumber.toFixed(10);
                 memoryOperation = nameSymbol;
-                
-    
-            } else{
+            } else {
                 entryNewNumber = true;
-                switch(memoryOperation){
+                switch (memoryOperation) {
                     case '+':
-                        memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_2__["default"].addition(memoryCurrentNumber, localMemoryNumber);
+                        memoryCurrentNumber = _operation2.default.addition(memoryCurrentNumber, localMemoryNumber);
                         break;
                     case '-':
-                        memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_2__["default"].subtraction(memoryCurrentNumber, localMemoryNumber);
+                        memoryCurrentNumber = _operation2.default.subtraction(memoryCurrentNumber, localMemoryNumber);
                         break;
                     case '*':
-                        memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_2__["default"].multiplication(memoryCurrentNumber, localMemoryNumber);
+                        memoryCurrentNumber = _operation2.default.multiplication(memoryCurrentNumber, localMemoryNumber);
                         break;
                     case '/':
-                        memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_2__["default"].division(memoryCurrentNumber, localMemoryNumber);
+                        memoryCurrentNumber = _operation2.default.division(memoryCurrentNumber, localMemoryNumber);
                         break;
                     case 'xn':
-                        memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_2__["default"].exponentiation(memoryCurrentNumber, localMemoryNumber);
+                        memoryCurrentNumber = _operation2.default.exponentiation(memoryCurrentNumber, localMemoryNumber);
                         break;
                     case 'y√x':
-                        memoryCurrentNumber = _helpers_operation__WEBPACK_IMPORTED_MODULE_2__["default"].mathroot(memoryCurrentNumber, localMemoryNumber);
+                        memoryCurrentNumber = _operation2.default.mathroot(memoryCurrentNumber, localMemoryNumber);
                         break;
                     default:
                         memoryCurrentNumber = parseFloat(localMemoryNumber);
                 };
-                
+
                 display.value = +memoryCurrentNumber.toFixed(10);
                 memoryOperation = symbol;
 
                 if (memoryOperation !== '=') {
                     historyDisplay.value += memoryOperation;
                 }
-                 
-
             };
-            
         };
-    
     };
 
     // Функция полной очистки значений калькулятора
 
-    var pressKeyClear = function (){
+    var pressKeyClear = function pressKeyClear() {
         display.value = 0;
         historyDisplay.value = '';
         historyNumber = '';
         memoryCurrentNumber = 0;
         memoryOperation = '';
         entryNewNumber = true;
-        
     };
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Calc);
-
+exports.default = Calc;
 
 /***/ }),
 
@@ -314,13 +306,15 @@ function Calc(id) {
 /*!************************************************!*\
   !*** ./src/js/calculator/helpers/operation.js ***!
   \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 
-  
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 var operations = {
     /**
      *  (1+2)
@@ -328,8 +322,8 @@ var operations = {
      * В функцию передается два числа, порядок не имеет значения.     * 
      * Возращает результат от операции.
      */
-    addition: function(numberOne, numberTwo){
-        let add = parseFloat(numberOne) + parseFloat(numberTwo);
+    addition: function addition(numberOne, numberTwo) {
+        var add = parseFloat(numberOne) + parseFloat(numberTwo);
         return add;
     },
 
@@ -339,8 +333,8 @@ var operations = {
      * Из первого переданного числа вычитается второе переданное.
      * Возращает результат от операции.
      */
-    subtraction: function(numberOne, numberTwo){
-        let sub = parseFloat(numberOne) - parseFloat(numberTwo);
+    subtraction: function subtraction(numberOne, numberTwo) {
+        var sub = parseFloat(numberOne) - parseFloat(numberTwo);
         return sub;
     },
 
@@ -348,8 +342,8 @@ var operations = {
      *  (1*2)
      * Функция умножения, возращает произведение двух чисел.
      */
-    multiplication: function(numberOne, numberTwo){
-        let mlp = parseFloat(numberOne) * parseFloat(numberTwo);
+    multiplication: function multiplication(numberOne, numberTwo) {
+        var mlp = parseFloat(numberOne) * parseFloat(numberTwo);
         return mlp;
     },
 
@@ -358,38 +352,35 @@ var operations = {
      * Функция деления, первое число делит на второе.
      * Возращает результат от операции.
      */
-    division: function(numberOne, numberTwo){
-        let dvsn = parseFloat(numberOne) / parseFloat(numberTwo);
+    division: function division(numberOne, numberTwo) {
+        var dvsn = parseFloat(numberOne) / parseFloat(numberTwo);
         return dvsn;
     },
-
-
 
     /**
      *  (3!)
      * Функция вычесления факториала.
      * Возращает результат от операции.
      */
-    factorial: function(numberOne){
-        let iteration = function(counter, accum){
+    factorial: function factorial(numberOne) {
+        var iteration = function iteration(counter, accum) {
             if (counter === 1 || counter === 0) {
                 return accum;
             } else {
-                return iteration(counter-1, counter * accum);
-            }   
-        }
+                return iteration(counter - 1, counter * accum);
+            }
+        };
 
         return iteration(+numberOne, 1);
     },
-
 
     /**
      *  (X в степени n)
      * Функция возведения в степень. Используется стандартный функционал Math
      * Возращает результат от операции.
      */
-    exponentiation: function(numberOne, numberTwo){
-        let pow = Math.pow(numberOne, numberTwo);
+    exponentiation: function exponentiation(numberOne, numberTwo) {
+        var pow = Math.pow(numberOne, numberTwo);
         return pow;
     },
 
@@ -398,8 +389,8 @@ var operations = {
      * Функция вычисления корня в n степени из x. Используется стандартный функционал Math
      * Возращает результат от операции.
      */
-    mathroot: function(numberOne, numberTwo){
-        let mrt = Math.pow(numberOne, 1/numberTwo);
+    mathroot: function mathroot(numberOne, numberTwo) {
+        var mrt = Math.pow(numberOne, 1 / numberTwo);
         return mrt;
     },
 
@@ -408,28 +399,23 @@ var operations = {
      * Функция вычисления логорифм из числа x. Используется стандартный функционал Math
      * Возращает результат от операции.
      */
-    log: function(numberOne){
-        let log = Math.log10(numberOne);
+    log: function log(numberOne) {
+        var log = Math.log10(numberOne);
         return log;
     },
 
-        /**
-     *  (логорифм из X)
-     * Функция вычисления логорифм из числа x. Используется стандартный функционал Math
-     * Возращает результат от операции.
-     */
-    sqrt: function(numberOne){
-        let sqrt = Math.sqrt(numberOne);
+    /**
+    *  (логорифм из X)
+    * Функция вычисления логорифм из числа x. Используется стандартный функционал Math
+    * Возращает результат от операции.
+    */
+    sqrt: function sqrt(numberOne) {
+        var sqrt = Math.sqrt(numberOne);
         return sqrt;
-    },
-}
+    }
+};
 
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = (operations);
+exports.default = operations;
 
 /***/ }),
 
@@ -437,11 +423,10 @@ var operations = {
 /*!*************************************************!*\
   !*** ./src/js/calculator/theming/themeColor.js ***!
   \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 
 
 /**
@@ -451,27 +436,29 @@ __webpack_require__.r(__webpack_exports__);
  * По умолчание один из классов должен быть на элементе.
  */
 
-function ChangeTheme(id){
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+function ChangeTheme(id) {
 
-    let doc = document,
+    var doc = document,
         elem = doc.querySelector(id);
 
-    let changeTheme = function(){
-    
-        let calc = elem.querySelector('.calc');
+    var changeTheme = function changeTheme() {
+
+        var calc = elem.querySelector('.calc');
         calc.classList.toggle('dark');
         calc.classList.toggle('light');
-    
     };
-    
+
     /* События на клик, смены цветовой темы */
-    this.init = function() {
-        let btnChangeTheme = elem.querySelector('.btnChangeTheme');
+    this.init = function () {
+        var btnChangeTheme = elem.querySelector('.btnChangeTheme');
         btnChangeTheme.addEventListener('click', changeTheme);
     };
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (ChangeTheme);
+exports.default = ChangeTheme;
 
 /***/ }),
 
@@ -479,11 +466,10 @@ function ChangeTheme(id){
 /*!************************************************!*\
   !*** ./src/js/calculator/theming/themeType.js ***!
   \************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
 
 
 /**
@@ -492,31 +478,32 @@ __webpack_require__.r(__webpack_exports__);
  * изменяет стили в CSS 
  */
 
-function ChangeThemeType(id){
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+function ChangeThemeType(id) {
 
-    let doc = document,
+    var doc = document,
         elem = doc.querySelector(id);
 
-    let changeThemeType = function(){
+    var changeThemeType = function changeThemeType() {
 
         elem.classList.toggle('calculator--width');
 
-        let keys = elem.querySelectorAll('.key-engineering');
-        for (let i = 0; i < keys.length; i++){
+        var keys = elem.querySelectorAll('.key-engineering');
+        for (var i = 0; i < keys.length; i++) {
             keys[i].classList.toggle('key-engineering--none');
         }
-
     };
 
     /* События на клик, смены типа калькулятора */
-    this.init = function(){
-        let btnChangeThemeType = elem.querySelector('.btnChangeThemeEngineering');
+    this.init = function () {
+        var btnChangeThemeType = elem.querySelector('.btnChangeThemeEngineering');
         btnChangeThemeType.addEventListener('click', changeThemeType);
     };
-
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (ChangeThemeType);
+exports.default = ChangeThemeType;
 
 /***/ }),
 
@@ -524,28 +511,28 @@ function ChangeThemeType(id){
 /*!*************************!*\
   !*** ./src/js/index.js ***!
   \*************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var normalize_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! normalize.css */ "./node_modules/normalize.css/normalize.css");
-/* harmony import */ var normalize_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(normalize_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../css/style.css */ "./src/css/style.css");
-/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_css_style_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _calculator_calculator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./calculator/calculator */ "./src/js/calculator/calculator.js");
 
 
+__webpack_require__(/*! normalize.css */ "./node_modules/normalize.css/normalize.css");
 
+__webpack_require__(/*! ../css/style.css */ "./src/css/style.css");
 
+var _calculator = __webpack_require__(/*! ./calculator/calculator */ "./src/js/calculator/calculator.js");
 
+var _calculator2 = _interopRequireDefault(_calculator);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // changeThemeType.init();
 
-var calc = new _calculator_calculator__WEBPACK_IMPORTED_MODULE_2__["default"]('#calculator');
+var calc = new _calculator2.default('#calculator');
 calc.init();
 
-var calc2 = new _calculator_calculator__WEBPACK_IMPORTED_MODULE_2__["default"]('#calculator2');
+var calc2 = new _calculator2.default('#calculator2');
 calc2.init();
 
 /***/ })
