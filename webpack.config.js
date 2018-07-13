@@ -48,6 +48,7 @@ var clientConfig = (function webpackConfig(){
 
   config.plugins.push(
     new HtmlWebpackPlugin({
+      h1: 'Test',
 	    template: 'src/template/index.html'
     })
   );
