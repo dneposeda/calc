@@ -176,6 +176,10 @@ function Calc(id) {
         // События на клик, добавление точки 
         var keyDot = elem.querySelector('.keydot');
         keyDot.addEventListener('click', pressKeyDot);
+
+        // События на клик, унарного минуса 
+        var keyUniMin = elem.querySelector('.unomin');
+        keyUniMin.addEventListener('click', pressKeyUnoMinus);
     };
 
     // Функция вывода цифр на экран
@@ -197,8 +201,6 @@ function Calc(id) {
                 historyDisplay.value += numb;
             };
         };
-
-        console.log(historyNumber);
     };
 
     // Функция точки, 
@@ -221,6 +223,23 @@ function Calc(id) {
         historyDisplay.value = historyNumber;
     };
 
+    // Функция унврный минус 
+
+    var pressKeyUnoMinus = function pressKeyUnoMinus() {
+
+        var localMemoryNumber = display.value;
+
+        if (localMemoryNumber.indexOf('-') === -1) {
+            localMemoryNumber = '-' + localMemoryNumber;
+        } else {
+            localMemoryNumber = localMemoryNumber;
+        };
+
+        display.value = localMemoryNumber;
+        historyNumber = display.value;
+        historyDisplay.value = historyNumber;
+    };
+
     // Функция отвечающия за операции
 
     var operationAction = function operationAction(clickEvent) {
@@ -232,10 +251,29 @@ function Calc(id) {
         if (entryNewNumber && memoryOperation !== '=') {
             display.value = memoryCurrentNumber;
             memoryOperation = symbol;
+            historyDisplay.value = display.value + memoryOperation;
         } else {
             if (nameSymbol !== '') {
                 entryNewNumber = true;
                 switch (nameSymbol) {
+                    case '%':
+                        historyDisplay.value += nameSymbol;
+                        switch (memoryOperation) {
+                            case '-':
+                                memoryCurrentNumber = memoryCurrentNumber - _operation2.default.percentage(memoryCurrentNumber, localMemoryNumber);
+                                break;
+                            case '+':
+                                memoryCurrentNumber = memoryCurrentNumber + _operation2.default.percentage(memoryCurrentNumber, localMemoryNumber);
+                                break;
+                            case '*':
+                                memoryCurrentNumber = _operation2.default.percentage(memoryCurrentNumber, localMemoryNumber);
+                                break;
+                            case '/':
+                                memoryCurrentNumber = _operation2.default.percentage(memoryCurrentNumber, localMemoryNumber);
+                                break;
+                        }
+
+                        break;
                     case 'log':
                         memoryCurrentNumber = _operation2.default.log(localMemoryNumber);
                         break;
@@ -405,13 +443,21 @@ var operations = {
     },
 
     /**
-    *  (логорифм из X)
-    * Функция вычисления логорифм из числа x. Используется стандартный функционал Math
-    * Возращает результат от операции.
-    */
+     *  (логорифм из X)
+     * Функция вычисления логорифм из числа x. Используется стандартный функционал Math
+     * Возращает результат от операции.
+     */
     sqrt: function sqrt(numberOne) {
         var sqrt = Math.sqrt(numberOne);
         return sqrt;
+    },
+
+    /**
+     * Функция проценты
+     */
+    percentage: function percentage(numberOne, numberTwo) {
+        var percentage = numberOne / 100 * parseFloat(numberTwo);
+        return percentage;
     }
 };
 
@@ -526,8 +572,6 @@ var _calculator = __webpack_require__(/*! ./calculator/calculator */ "./src/js/c
 var _calculator2 = _interopRequireDefault(_calculator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// changeThemeType.init();
 
 var calc = new _calculator2.default('#calculator');
 calc.init();

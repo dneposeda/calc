@@ -58,7 +58,7 @@ var clientConfig = (function webpackConfig(){
 
   config.plugins.push(
     new HtmlWebpackPlugin({
-      h1: 'production',
+      h1: '«Production mode»',
 	    template: 'src/template/index.html'
     })
   );

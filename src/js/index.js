@@ -4,8 +4,6 @@ import 'normalize.css';
 import '../css/style.css';
 import Calc from './calculator/calculator';
 
-// changeThemeType.init();
-
 var calc = new Calc('#calculator');
 calc.init();
 

@@ -7,7 +7,7 @@ import operations from './helpers/operation';
 
 function Calc(id) {
 
-    var doc = document,
+    let doc = document,
         elem = doc.querySelector(id),
         display = elem.querySelector('.display'),
         historyDisplay = elem.querySelector('.displayHistory'),
@@ -16,10 +16,10 @@ function Calc(id) {
         memoryOperation = '',
         entryNewNumber = false;
 
-    var changeTheme = new ChangeTheme(id);
+    let changeTheme = new ChangeTheme(id);
     changeTheme.init();
 
-    var changeThemeType = new ChangeThemeType(id);
+    let changeThemeType = new ChangeThemeType(id);
     changeThemeType.init();
     
     this.init = function(){
@@ -48,13 +48,17 @@ function Calc(id) {
         // События на клик, добавление точки 
         let keyDot = elem.querySelector('.keydot');
         keyDot.addEventListener('click', pressKeyDot);
+
+        // События на клик, унарного минуса 
+        let keyUniMin = elem.querySelector('.unomin');
+        keyUniMin.addEventListener('click', pressKeyUnoMinus);
     }
     
     
     
     // Функция вывода цифр на экран
     
-    var pressKeyNumber = function(clickEvent){
+    let pressKeyNumber = function(clickEvent){
 
         let numb = clickEvent.target.textContent;
 
@@ -70,18 +74,15 @@ function Calc(id) {
                 display.value += numb;
                 historyDisplay.value += numb;
             };
-        };
-
-        console.log(historyNumber);
-    
+        }; 
     };
         
 
     // Функция точки, 
 
-    var pressKeyDot = function pressKeyDot(){
+    let pressKeyDot = function pressKeyDot(){
 
-        var localMemoryDot = display.value;
+        let localMemoryDot = display.value;
 
         if (entryNewNumber){
             localMemoryDot = '0.';
@@ -98,10 +99,28 @@ function Calc(id) {
 
     };
 
+    // Функция унврный минус 
+
+    let pressKeyUnoMinus = function (){
+
+        let localMemoryNumber = display.value;
+
+        if (localMemoryNumber.indexOf('-') === -1){
+                localMemoryNumber = '-' + localMemoryNumber;
+        } else {
+            localMemoryNumber = localMemoryNumber;
+        };
+
+        display.value = localMemoryNumber;
+        historyNumber = display.value;
+        historyDisplay.value = historyNumber;
+
+    };
+
 
     // Функция отвечающия за операции
        
-    var operationAction = function (clickEvent){
+    let operationAction = function (clickEvent){
          
         let localMemoryNumber = display.value,
             symbol = clickEvent.target.textContent,
@@ -110,10 +129,30 @@ function Calc(id) {
         if (entryNewNumber && memoryOperation !== '='){
             display.value = memoryCurrentNumber;
             memoryOperation = symbol;
+            historyDisplay.value = display.value + memoryOperation;
         } else {
             if (nameSymbol !== ''){
                 entryNewNumber = true;
                 switch(nameSymbol){
+                    case '%':
+                        historyDisplay.value += nameSymbol;
+                        switch(memoryOperation){
+                            case '-':
+                                memoryCurrentNumber = memoryCurrentNumber - operations.percentage(memoryCurrentNumber, localMemoryNumber);
+                            break;
+                            case '+':
+                                memoryCurrentNumber = memoryCurrentNumber + operations.percentage(memoryCurrentNumber, localMemoryNumber);
+                            break;
+                            case '*':
+                                memoryCurrentNumber = operations.percentage(memoryCurrentNumber, localMemoryNumber);
+                            break;
+                            case '/':
+                                memoryCurrentNumber = operations.percentage(memoryCurrentNumber, localMemoryNumber);
+                            break;
+                        }
+                        
+                        
+                    break;
                     case 'log':
                         memoryCurrentNumber = operations.log(localMemoryNumber);
                         break;

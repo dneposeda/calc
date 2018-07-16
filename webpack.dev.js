@@ -58,7 +58,7 @@ var clientConfig = (function webpackConfig(){
 
   config.plugins.push(
     new HtmlWebpackPlugin({
-      h1: 'development',
+      h1: '«Development mode»',
 	    template: 'src/template/index.html'
     })
   );

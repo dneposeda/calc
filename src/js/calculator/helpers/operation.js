@@ -92,7 +92,7 @@ var operations = {
         return log;
     },
 
-        /**
+    /**
      *  (логорифм из X)
      * Функция вычисления логорифм из числа x. Используется стандартный функционал Math
      * Возращает результат от операции.
@@ -100,6 +100,15 @@ var operations = {
     sqrt: function(numberOne){
         let sqrt = Math.sqrt(numberOne);
         return sqrt;
+    },
+
+
+    /**
+     * Функция проценты
+     */
+    percentage: function(numberOne, numberTwo){
+        let percentage = (numberOne / 100) * parseFloat(numberTwo);
+        return percentage;
     },
 }
 
