@@ -1,46 +1,54 @@
-.theme__switch-input {
-    height: 0;
-    width: 0;
-    visibility: hidden;
-}
+.theme {
+    // width: 210px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    
+    &__switch {
+        margin: 7px 0;
+        color: $black;
 
-.theme__switch-label {
-    cursor: pointer;
-    text-indent: -117px;
-    width: 60px;
-    height: 30px;
-    background: grey;
-    display: block;
-    border-radius: 15px;
-    position: relative;
-    line-height: 27px;
-    font-size: 18px;
-    font-family: 'Oxygen',sans-serif;
-    margin-left: auto;
+        &-input {
+            display: none;
 
-    &:after {
-        content: '';
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        width: 20px;
-        height: 20px;
-        background: #fff;
-        border-radius: 10px;
-        transition: 0.3s;
+            &:checked + .theme__switch-label {
+                background: #bada55;
+            }
+            
+            &:checked + .theme__switch-label:after {
+                left: calc(100% - 5px);
+                transform: translateX(-100%);
+            }
+        }
+
+        &-label {
+            cursor: pointer;
+            text-indent: -106px;
+            width: 40px;
+            height: 20px;
+            background: grey;
+            display: block;
+            border-radius: 10px;
+            position: relative;
+            line-height: 16px;
+            font-size: 16px;
+            font-family: 'Oxygen',sans-serif;
+            margin-left: auto;
+        
+            &:after {
+                content: '';
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                width: 12px;
+                height: 12px;
+                background: #fff;
+                border-radius: 50%;
+                transition: 0.3s;
+            }
+
+            &:active:after {
+                width: 30px;
+            }
+        }
     }
-}
-
-
-.theme__switch-input:checked + .theme__switch-label {
-    background: #bada55;
-}
-
-.theme__switch-input:checked + .theme__switch-label:after {
-    left: calc(100% - 5px);
-    transform: translateX(-100%);
-}
-
-.theme__switch-label:active:after {
-    width: 50px;
 }

@@ -1,5 +1,13 @@
 .dark {
 
+    .theme {
+        background-color: $dark-key-bg;
+    }
+
+    .theme__switch {
+        color: $white;
+    }
+
     .calc__keys {
         background-color: $dark-key-bg;
     }

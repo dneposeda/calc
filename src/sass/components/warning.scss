@@ -1,0 +1,10 @@
+.warning {
+    font-size: 18px;
+    text-align: center;
+    background-color: #61b832;
+    color: $white;
+    background-size: 50px 50px;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%, rgba(255, 255, 255, .05) 75%, transparent 75%, transparent);
+    padding: 15px 0;
+    margin: 0;
+}
