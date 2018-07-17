@@ -12,7 +12,7 @@ function ChangeTheme(id){
     let doc = document,
         elem = doc.querySelector(id);
 
-    let changeTheme = function(){
+    let changeTheme = () => {
     
         let calc = elem.querySelector('.calc');
         calc.classList.toggle('dark');
@@ -21,7 +21,7 @@ function ChangeTheme(id){
     };
     
     /* События на клик, смены цветовой темы */
-    this.init = function() {
+    this.init = () => {
         let btnChangeTheme = elem.querySelector('.btnChangeTheme');
         btnChangeTheme.addEventListener('click', changeTheme);
     };

@@ -22,7 +22,7 @@ function Calc(id) {
     let changeThemeType = new ChangeThemeType(id);
     changeThemeType.init();
     
-    this.init = function(){
+    this.init = () => {
        
         // События на клик, ввод цифр 
         let keyNumbers = elem.querySelectorAll('.keynumber');
@@ -42,7 +42,7 @@ function Calc(id) {
     
         // События на клик, очистка калькулятора 
         let keyAc = elem.querySelector('.keyac');
-        keyAc.addEventListener('click', pressKeyClear);
+        keyAc.addEventListener('click', operationClear);
     
     
         // События на клик, добавление точки 
@@ -58,7 +58,7 @@ function Calc(id) {
     
     // Функция вывода цифр на экран
     
-    let pressKeyNumber = function(clickEvent){
+    let pressKeyNumber = (clickEvent) => {
 
         let numb = clickEvent.target.textContent;
 
@@ -80,7 +80,7 @@ function Calc(id) {
 
     // Функция точки, 
 
-    let pressKeyDot = function pressKeyDot(){
+    let pressKeyDot = () => {
 
         let localMemoryDot = display.value;
 
@@ -101,7 +101,7 @@ function Calc(id) {
 
     // Функция унврный минус 
 
-    let pressKeyUnoMinus = function (){
+    let pressKeyUnoMinus = () => {
 
         let localMemoryNumber = display.value;
 
@@ -120,7 +120,7 @@ function Calc(id) {
 
     // Функция отвечающия за операции
        
-    let operationAction = function (clickEvent){
+    let operationAction = (clickEvent) => {
          
         let localMemoryNumber = display.value,
             symbol = clickEvent.target.textContent,
@@ -211,7 +211,7 @@ function Calc(id) {
 
     // Функция полной очистки значений калькулятора
 
-    var pressKeyClear = function (){
+    let operationClear = () => {
         display.value = 0;
         historyDisplay.value = '';
         historyNumber = '';

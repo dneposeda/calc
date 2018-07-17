@@ -1,6 +1,6 @@
 'use strict';
   
-var operations = {
+let operations = {
     /**
      *  (1+2)
      * Функция сложения двух чисел.

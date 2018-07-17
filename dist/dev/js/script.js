@@ -171,7 +171,7 @@ function Calc(id) {
 
         // События на клик, очистка калькулятора 
         var keyAc = elem.querySelector('.keyac');
-        keyAc.addEventListener('click', pressKeyClear);
+        keyAc.addEventListener('click', operationClear);
 
         // События на клик, добавление точки 
         var keyDot = elem.querySelector('.keydot');
@@ -326,7 +326,7 @@ function Calc(id) {
 
     // Функция полной очистки значений калькулятора
 
-    var pressKeyClear = function pressKeyClear() {
+    var operationClear = function operationClear() {
         display.value = 0;
         historyDisplay.value = '';
         historyNumber = '';

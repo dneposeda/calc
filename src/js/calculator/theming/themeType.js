@@ -11,7 +11,7 @@ function ChangeThemeType(id){
     let doc = document,
         elem = doc.querySelector(id);
 
-    let changeThemeType = function(){
+    let changeThemeType = () => {
 
         elem.classList.toggle('calculator--width');
 
@@ -23,7 +23,7 @@ function ChangeThemeType(id){
     };
 
     /* События на клик, смены типа калькулятора */
-    this.init = function(){
+    this.init = () => {
         let btnChangeThemeType = elem.querySelector('.btnChangeThemeEngineering');
         btnChangeThemeType.addEventListener('click', changeThemeType);
     };
