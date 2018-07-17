@@ -136,7 +136,10 @@ var _operation2 = _interopRequireDefault(_operation);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Calc(id) {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Calc = function Calc(id) {
+    _classCallCheck(this, Calc);
 
     var doc = document,
         elem = doc.querySelector(id),
@@ -334,7 +337,9 @@ function Calc(id) {
         memoryOperation = '';
         entryNewNumber = true;
     };
-}
+};
+
+;
 
 exports.default = Calc;
 
