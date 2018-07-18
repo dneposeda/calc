@@ -2,7 +2,9 @@
 
 import ChangeTheme from './theming/themeColor';
 import ChangeThemeType from './theming/themeType';
+import ChangeHistoryDisplay from './theming/historyDisplay';
 import operations from './helpers/operation'; 
+import MenuCalc from './helpers/menuCalc'; 
 
 
 class Calc {
@@ -15,14 +17,25 @@ class Calc {
             historyNumber = '',
             memoryCurrentNumber = 0,
             memoryOperation = '',
+            historyArray = [],
             entryNewNumber = false;
 
+        // смена цветовой темы    
         let changeTheme = new ChangeTheme(id);
         changeTheme.init();
 
+        // смена типа калькулятора
         let changeThemeType = new ChangeThemeType(id);
         changeThemeType.init();
-        
+
+        //вкл/откл истории операций
+        let changeHistoryDisplay = new ChangeHistoryDisplay(id);
+        changeHistoryDisplay.init();
+
+        //вкл/откл меню настроек
+        let MenuCalcBtn = new MenuCalc(id);
+        MenuCalcBtn.init();
+
         this.init = () => {
         
             // События на клик, ввод цифр 
@@ -100,21 +113,24 @@ class Calc {
 
         };
 
-        // Функция унврный минус 
+        // Функция унарный минус 
 
         let pressKeyUnoMinus = () => {
 
             let localMemoryNumber = display.value;
 
-            if (localMemoryNumber.indexOf('-') === -1){
+            if (localMemoryNumber != '0'){
+                if (localMemoryNumber.indexOf('-') === -1){
                     localMemoryNumber = '-' + localMemoryNumber;
-            } else {
-                localMemoryNumber = localMemoryNumber;
-            };
+                } else {
+                    localMemoryNumber = localMemoryNumber.substr(1);
+                };
 
-            display.value = localMemoryNumber;
-            historyNumber = display.value;
-            historyDisplay.value = historyNumber;
+                display.value = localMemoryNumber;
+                historyNumber = display.value;
+                historyDisplay.value = historyNumber;
+
+            }
 
         };
 
@@ -151,9 +167,7 @@ class Calc {
                                     memoryCurrentNumber = operations.percentage(memoryCurrentNumber, localMemoryNumber);
                                 break;
                             }
-                            
-                            
-                        break;
+                            break;
                         case 'log':
                             memoryCurrentNumber = operations.log(localMemoryNumber);
                             break;
@@ -216,6 +230,7 @@ class Calc {
             display.value = 0;
             historyDisplay.value = '';
             historyNumber = '';
+            historyArray = [];
             memoryCurrentNumber = 0;
             memoryOperation = '';
             entryNewNumber = true;

@@ -1,7 +1,14 @@
 .theme {
-    // width: 210px;
+    position: absolute;
+    transform: translateY(0);
+    width: 100%;
     padding: 10px;
     background-color: #f4f4f4;
+    transition: all 0.3s;
+
+    &--active {
+        transform: translateY(-97px);  
+    }
     
     &__switch {
         margin: 7px 0;

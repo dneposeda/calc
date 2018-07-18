@@ -130,9 +130,17 @@ var _themeType = __webpack_require__(/*! ./theming/themeType */ "./src/js/calcul
 
 var _themeType2 = _interopRequireDefault(_themeType);
 
+var _historyDisplay = __webpack_require__(/*! ./theming/historyDisplay */ "./src/js/calculator/theming/historyDisplay.js");
+
+var _historyDisplay2 = _interopRequireDefault(_historyDisplay);
+
 var _operation = __webpack_require__(/*! ./helpers/operation */ "./src/js/calculator/helpers/operation.js");
 
 var _operation2 = _interopRequireDefault(_operation);
+
+var _menuCalc = __webpack_require__(/*! ./helpers/menuCalc */ "./src/js/calculator/helpers/menuCalc.js");
+
+var _menuCalc2 = _interopRequireDefault(_menuCalc);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -148,13 +156,24 @@ var Calc = function Calc(id) {
         historyNumber = '',
         memoryCurrentNumber = 0,
         memoryOperation = '',
+        historyArray = [],
         entryNewNumber = false;
 
+    // смена цветовой темы    
     var changeTheme = new _themeColor2.default(id);
     changeTheme.init();
 
+    // смена типа калькулятора
     var changeThemeType = new _themeType2.default(id);
     changeThemeType.init();
+
+    //вкл/откл истории операций
+    var changeHistoryDisplay = new _historyDisplay2.default(id);
+    changeHistoryDisplay.init();
+
+    //вкл/откл меню настроек
+    var MenuCalcBtn = new _menuCalc2.default(id);
+    MenuCalcBtn.init();
 
     this.init = function () {
 
@@ -226,21 +245,23 @@ var Calc = function Calc(id) {
         historyDisplay.value = historyNumber;
     };
 
-    // Функция унврный минус 
+    // Функция унарный минус 
 
     var pressKeyUnoMinus = function pressKeyUnoMinus() {
 
         var localMemoryNumber = display.value;
 
-        if (localMemoryNumber.indexOf('-') === -1) {
-            localMemoryNumber = '-' + localMemoryNumber;
-        } else {
-            localMemoryNumber = localMemoryNumber;
-        };
+        if (localMemoryNumber != '0') {
+            if (localMemoryNumber.indexOf('-') === -1) {
+                localMemoryNumber = '-' + localMemoryNumber;
+            } else {
+                localMemoryNumber = localMemoryNumber.substr(1);
+            };
 
-        display.value = localMemoryNumber;
-        historyNumber = display.value;
-        historyDisplay.value = historyNumber;
+            display.value = localMemoryNumber;
+            historyNumber = display.value;
+            historyDisplay.value = historyNumber;
+        }
     };
 
     // Функция отвечающия за операции
@@ -275,7 +296,6 @@ var Calc = function Calc(id) {
                                 memoryCurrentNumber = _operation2.default.percentage(memoryCurrentNumber, localMemoryNumber);
                                 break;
                         }
-
                         break;
                     case 'log':
                         memoryCurrentNumber = _operation2.default.log(localMemoryNumber);
@@ -333,6 +353,7 @@ var Calc = function Calc(id) {
         display.value = 0;
         historyDisplay.value = '';
         historyNumber = '';
+        historyArray = [];
         memoryCurrentNumber = 0;
         memoryOperation = '';
         entryNewNumber = true;
@@ -342,6 +363,44 @@ var Calc = function Calc(id) {
 ;
 
 exports.default = Calc;
+
+/***/ }),
+
+/***/ "./src/js/calculator/helpers/menuCalc.js":
+/*!***********************************************!*\
+  !*** ./src/js/calculator/helpers/menuCalc.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+function menuCalc(id) {
+
+    var doc = document,
+        elem = doc.querySelector(id);
+
+    var menuCalcBtn = function menuCalcBtn() {
+
+        var menuCalcBtn = elem.querySelector('.hamburger__line');
+        menuCalcBtn.classList.toggle('hamburger__line--active');
+
+        var menuCalcBtnMenu = elem.querySelector('.theme');
+        menuCalcBtnMenu.classList.toggle('theme--active');
+    };
+
+    /* События на клик, отображения меню калькулятора */
+    this.init = function () {
+        var hamburgerBtn = elem.querySelector('.hamburger');
+        hamburgerBtn.addEventListener('click', menuCalcBtn);
+    };
+}
+
+exports.default = menuCalc;
 
 /***/ }),
 
@@ -467,6 +526,48 @@ var operations = {
 };
 
 exports.default = operations;
+
+/***/ }),
+
+/***/ "./src/js/calculator/theming/historyDisplay.js":
+/*!*****************************************************!*\
+  !*** ./src/js/calculator/theming/historyDisplay.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Включает отображение журнала истории операций, функция делает замену классов на элементе.
+ * Функция находит элемен с ID history и проверяет наличие класса calc__display-history--none,
+ * если класс есть убирает его, если нет добавляет.
+ * По умолчание класс calc__display-history--none должен быть на элементе.
+ */
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+function historyDisplay(id) {
+
+    var doc = document,
+        elem = doc.querySelector(id);
+
+    var changeHistoryDisplay = function changeHistoryDisplay() {
+
+        var history = elem.querySelector('#history');
+        history.classList.toggle('calc__display-history--none');
+    };
+
+    /* События на клик, для вкл/откл истории операций */
+    this.init = function () {
+        var btnChangeHistory = elem.querySelector('.btnChangeHistory');
+        btnChangeHistory.addEventListener('click', changeHistoryDisplay);
+    };
+}
+
+exports.default = historyDisplay;
 
 /***/ }),
 
