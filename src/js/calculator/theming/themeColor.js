@@ -1,30 +1,30 @@
 'use strict';
 
 /**
- * Смена темы, функция делает замену классов на элементе.
- * Функция находит элемен с ID calc и проверяет наличие классов dark и light,
+ * Смена темы, функция делает замену класса CSS на элементе.
+ * Класс находит элемен с ID и проверяет наличие классов dark и light,
  * если класс есть убирает его, если нет добавляет.
  * По умолчание один из классов должен быть на элементе.
+ * Классу необходимо передать ID элемента.
  */
 
-function ChangeTheme(id){
+export default class ChangeTheme{
+    constructor(id){
+        this.elem = document.querySelector(id);
+    }
 
-    let doc = document,
-        elem = doc.querySelector(id);
+    init(){
 
-    let changeTheme = () => {
-    
-        let calc = elem.querySelector('.calc');
+        // События на клик, смены цветовой темы 
+        let btnChangeTheme = this.elem.querySelector('.btnChangeTheme');
+        btnChangeTheme.addEventListener('click', this.changeTheme.bind(this));
+    }
+
+    changeTheme(){
+
+        // меняет цветовую схему с помощью смены css класса
+        let calc = this.elem.querySelector('.calc');
         calc.classList.toggle('dark');
         calc.classList.toggle('light');
-    
-    };
-    
-    /* События на клик, смены цветовой темы */
-    this.init = () => {
-        let btnChangeTheme = elem.querySelector('.btnChangeTheme');
-        btnChangeTheme.addEventListener('click', changeTheme);
-    };
+    }
 }
-
-export default ChangeTheme;

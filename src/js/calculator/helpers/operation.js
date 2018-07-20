@@ -113,8 +113,4 @@ let operations = {
 }
 
 
-
-
-
-
 export default operations;

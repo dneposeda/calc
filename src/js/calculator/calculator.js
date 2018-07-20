@@ -1,243 +1,218 @@
 'use strict';
 
 import ChangeTheme from './theming/themeColor';
-import ChangeThemeType from './theming/themeType';
-import ChangeHistoryDisplay from './theming/historyDisplay';
+import ChangeThemeType from './core/themeType';
+import HistoryDisplay from './core/historyDisplay';
 import operations from './helpers/operation'; 
-import MenuCalc from './helpers/menuCalc'; 
+import MenuCalc from './helpers/menu'; 
 
+export default class Calc {
+    constructor(id){
 
-class Calc {
-    constructor(id) {
-
-        let doc = document,
-            elem = doc.querySelector(id),
-            display = elem.querySelector('.display'),
-            historyDisplay = elem.querySelector('.displayHistory'),
-            historyNumber = '',
-            memoryCurrentNumber = 0,
-            memoryOperation = '',
-            historyArray = [],
-            entryNewNumber = false;
+        this.id = id;
+        this.elem = document.querySelector(this.id),
+        this.display = this.elem.querySelector('.display'),
+        this.historyDisplay = this.elem.querySelector('.displayHistory'),
+        this.historyNumber = '',
+        this.memoryCurrentNumber = 0,
+        this.memoryOperation = '',
+        this.historyArray = [],
+        this.entryNewNumber = false;
 
         // смена цветовой темы    
         let changeTheme = new ChangeTheme(id);
         changeTheme.init();
 
         // смена типа калькулятора
-        let changeThemeType = new ChangeThemeType(id);
-        changeThemeType.init();
+        let calcType = new ChangeThemeType(id);
+        calcType.init();
 
         //вкл/откл истории операций
-        let changeHistoryDisplay = new ChangeHistoryDisplay(id);
+        let changeHistoryDisplay = new HistoryDisplay(id);
         changeHistoryDisplay.init();
 
         //вкл/откл меню настроек
         let MenuCalcBtn = new MenuCalc(id);
         MenuCalcBtn.init();
+    }
 
-        this.init = () => {
-        
-            // События на клик, ввод цифр 
-            let keyNumbers = elem.querySelectorAll('.keynumber');
-            for (let i = 0; i < keyNumbers.length; i++){
-                let keyNumber = keyNumbers[i];
-                keyNumber.addEventListener('click', pressKeyNumber);
-            }
-        
-        
-            // События на клик по операциям 
-            let keyOperations = elem.querySelectorAll('.keyoperations');
-            for (let i = 0; i<keyOperations.length; i++){
-                let keyOperation = keyOperations[i];
-                keyOperation.addEventListener('click', operationAction);
-            }
-        
-        
-            // События на клик, очистка калькулятора 
-            let keyAc = elem.querySelector('.keyac');
-            keyAc.addEventListener('click', operationClear);
-        
-        
-            // События на клик, добавление точки 
-            let keyDot = elem.querySelector('.keydot');
-            keyDot.addEventListener('click', pressKeyDot);
+    init(){
 
-            // События на клик, унарного минуса 
-            let keyUniMin = elem.querySelector('.unomin');
-            keyUniMin.addEventListener('click', pressKeyUnoMinus);
+        // События на клик, ввод цифр 
+        let keyNumbers = this.elem.querySelectorAll('.keynumber');
+        for (let i = 0; i < keyNumbers.length; i++){
+            let keyNumber = keyNumbers[i];
+            keyNumber.addEventListener('click', this.pressKeyNumber.bind(this));
         }
-        
-        
-        
-        // Функция вывода цифр на экран
-        
-        let pressKeyNumber = (clickEvent) => {
 
-            let numb = clickEvent.target.textContent;
 
-            if (entryNewNumber){
-                display.value = numb;
-                historyDisplay.value += display.value;
-                entryNewNumber = false;
+        // События на клик по операциям 
+        let keyOperations = this.elem.querySelectorAll('.keyoperations');
+        for (let i = 0; i<keyOperations.length; i++){
+            let keyOperation = keyOperations[i];
+            keyOperation.addEventListener('click', this.operationAction.bind(this));
+        }
+
+        // События на клик, очистка калькулятора 
+        let keyAc = this.elem.querySelector('.keyac');
+        keyAc.addEventListener('click', this.operationClear.bind(this));
+
+        // События на клик, добавление точки 
+        let keyDot = this.elem.querySelector('.keydot');
+        keyDot.addEventListener('click', this.pressKeyDot.bind(this));
+
+        // События на клик, унарного минуса 
+        let keyUniMin = this.elem.querySelector('.unomin');
+        keyUniMin.addEventListener('click', this.operationUnoMinus.bind(this));
+    }
+
+    pressKeyNumber(clickEvent){
+
+        let numb = clickEvent.target.textContent;
+
+        if (this.entryNewNumber){
+            this.display.value = numb;
+            this.historyDisplay.value += this.display.value;
+            this.entryNewNumber = false;
+        } else {
+            if (this.display.value === '0'){
+                this.display.value = numb;
+                this.historyDisplay.value = this.display.value;
             } else {
-                if (display.value === '0'){
-                    display.value = numb;
-                    historyDisplay.value = display.value;
-                } else {
-                    display.value += numb;
-                    historyDisplay.value += numb;
-                };
-            }; 
+                this.display.value += numb;
+                this.historyDisplay.value += numb;
+            }
+        }
+    }
+
+    pressKeyDot(){
+        let localMemoryDot = this.display.value;
+
+        if (this.entryNewNumber){
+            localMemoryDot = '0.';
+            this.entryNewNumber = false;
+        } else {
+            if (localMemoryDot.indexOf('.') === -1){
+                localMemoryDot += '.';
+            };
         };
-            
 
-        // Функция точки, 
+        this.display.value = localMemoryDot;
+        this.historyNumber = this.display.value;
+        this.historyDisplay.value = this.historyNumber;
+    }
 
-        let pressKeyDot = () => {
+    operationUnoMinus(){
+       
+        let localMemoryNumber = this.display.value;
 
-            let localMemoryDot = display.value;
-
-            if (entryNewNumber){
-                localMemoryDot = '0.';
-                entryNewNumber = false;
+        if (localMemoryNumber != '0'){
+            if (localMemoryNumber.indexOf('-') === -1){
+                localMemoryNumber = '-' + localMemoryNumber;
             } else {
-                if (localMemoryDot.indexOf('.') === -1){
-                    localMemoryDot += '.';
-                };
+                localMemoryNumber = localMemoryNumber.substr(1);
             };
 
-            display.value = localMemoryDot;
-            historyNumber = display.value;
-            historyDisplay.value = historyNumber;
+            this.display.value = localMemoryNumber;
+            this.historyNumber = this.display.value;
+            this.historyDisplay.value = this.historyNumber;
+        }
+    }
 
-        };
-
-        // Функция унарный минус 
-
-        let pressKeyUnoMinus = () => {
-
-            let localMemoryNumber = display.value;
-
-            if (localMemoryNumber != '0'){
-                if (localMemoryNumber.indexOf('-') === -1){
-                    localMemoryNumber = '-' + localMemoryNumber;
-                } else {
-                    localMemoryNumber = localMemoryNumber.substr(1);
+    operationAction(clickEvent){
+                  
+        let localMemoryNumber = this.display.value,
+            symbol = clickEvent.target.textContent,
+            nameSymbol = clickEvent.target.value;
+        
+        if (this.entryNewNumber && this.memoryOperation !== '='){
+            this.display.value = this.memoryCurrentNumber;
+            this.memoryOperation = symbol;
+            this.historyDisplay.value = this.display.value + this.memoryOperation;
+        } else {
+            if (nameSymbol !== ''){
+                this.entryNewNumber = true;
+                switch(nameSymbol){
+                    case '%':
+                    this.historyDisplay.value += nameSymbol;
+                        switch(this.memoryOperation){
+                            case '-':
+                                this.memoryCurrentNumber = this.memoryCurrentNumber - operations.percentage(this.memoryCurrentNumber, localMemoryNumber);
+                            break;
+                            case '+':
+                                this.memoryCurrentNumber = this.memoryCurrentNumber + operations.percentage(this.memoryCurrentNumber, localMemoryNumber);
+                            break;
+                            case '*':
+                                this.memoryCurrentNumber = operations.percentage(this.memoryCurrentNumber, localMemoryNumber);
+                            break;
+                            case '/':
+                                this.memoryCurrentNumber = operations.percentage(this.memoryCurrentNumber, localMemoryNumber);
+                            break;
+                        }
+                        break;
+                    case 'log':
+                        this.memoryCurrentNumber = operations.log(localMemoryNumber);
+                        break;
+                    case 'rootx':
+                        this.memoryCurrentNumber = operations.sqrt(localMemoryNumber);
+                        break;
+                    case 'n!':
+                        this.memoryCurrentNumber = operations.factorial(localMemoryNumber);
+                        break;
+                    default:
+                        this.memoryCurrentNumber = parseFloat(localMemoryNumber);
                 };
-
-                display.value = localMemoryNumber;
-                historyNumber = display.value;
-                historyDisplay.value = historyNumber;
-
-            }
-
-        };
-
-
-        // Функция отвечающия за операции
-        
-        let operationAction = (clickEvent) => {
-            
-            let localMemoryNumber = display.value,
-                symbol = clickEvent.target.textContent,
-                nameSymbol = clickEvent.target.value;
-            
-            if (entryNewNumber && memoryOperation !== '='){
-                display.value = memoryCurrentNumber;
-                memoryOperation = symbol;
-                historyDisplay.value = display.value + memoryOperation;
-            } else {
-                if (nameSymbol !== ''){
-                    entryNewNumber = true;
-                    switch(nameSymbol){
-                        case '%':
-                            historyDisplay.value += nameSymbol;
-                            switch(memoryOperation){
-                                case '-':
-                                    memoryCurrentNumber = memoryCurrentNumber - operations.percentage(memoryCurrentNumber, localMemoryNumber);
-                                break;
-                                case '+':
-                                    memoryCurrentNumber = memoryCurrentNumber + operations.percentage(memoryCurrentNumber, localMemoryNumber);
-                                break;
-                                case '*':
-                                    memoryCurrentNumber = operations.percentage(memoryCurrentNumber, localMemoryNumber);
-                                break;
-                                case '/':
-                                    memoryCurrentNumber = operations.percentage(memoryCurrentNumber, localMemoryNumber);
-                                break;
-                            }
-                            break;
-                        case 'log':
-                            memoryCurrentNumber = operations.log(localMemoryNumber);
-                            break;
-                        case 'rootx':
-                            memoryCurrentNumber = operations.sqrt(localMemoryNumber);
-                            break;
-                        case 'n!':
-                            memoryCurrentNumber = operations.factorial(localMemoryNumber);
-                            break;
-                        default:
-                            memoryCurrentNumber = parseFloat(localMemoryNumber);
-                    };
-        
-                    display.value = +memoryCurrentNumber.toFixed(10);
-                    memoryOperation = nameSymbol;
-                    
-        
-                } else{
-                    entryNewNumber = true;
-                    switch(memoryOperation){
-                        case '+':
-                            memoryCurrentNumber = operations.addition(memoryCurrentNumber, localMemoryNumber);
-                            break;
-                        case '-':
-                            memoryCurrentNumber = operations.subtraction(memoryCurrentNumber, localMemoryNumber);
-                            break;
-                        case '*':
-                            memoryCurrentNumber = operations.multiplication(memoryCurrentNumber, localMemoryNumber);
-                            break;
-                        case '/':
-                            memoryCurrentNumber = operations.division(memoryCurrentNumber, localMemoryNumber);
-                            break;
-                        case 'xn':
-                            memoryCurrentNumber = operations.exponentiation(memoryCurrentNumber, localMemoryNumber);
-                            break;
-                        case 'y√x':
-                            memoryCurrentNumber = operations.mathroot(memoryCurrentNumber, localMemoryNumber);
-                            break;
-                        default:
-                            memoryCurrentNumber = parseFloat(localMemoryNumber);
-                    };
-                    
-                    display.value = +memoryCurrentNumber.toFixed(10);
-                    memoryOperation = symbol;
-
-                    if (memoryOperation !== '=') {
-                        historyDisplay.value += memoryOperation;
-                    }
-                    
-
+    
+                this.display.value = +this.memoryCurrentNumber.toFixed(10);
+                this.memoryOperation = nameSymbol;
+                
+    
+            } else{
+                this.entryNewNumber = true;
+                switch(this.memoryOperation){
+                    case '+':
+                        this.memoryCurrentNumber = operations.addition(this.memoryCurrentNumber, localMemoryNumber);
+                        break;
+                    case '-':
+                        this.memoryCurrentNumber = operations.subtraction(this.memoryCurrentNumber, localMemoryNumber);
+                        break;
+                    case '*':
+                        this.memoryCurrentNumber = operations.multiplication(this.memoryCurrentNumber, localMemoryNumber);
+                        break;
+                    case '/':
+                        this.memoryCurrentNumber = operations.division(this.memoryCurrentNumber, localMemoryNumber);
+                        break;
+                    case 'xn':
+                        this.memoryCurrentNumber = operations.exponentiation(this.memoryCurrentNumber, localMemoryNumber);
+                        break;
+                    case 'y√x':
+                        this.memoryCurrentNumber = operations.mathroot(this.memoryCurrentNumber, localMemoryNumber);
+                        break;
+                    default:
+                    this.memoryCurrentNumber = parseFloat(localMemoryNumber);
                 };
                 
+                this.display.value = +this.memoryCurrentNumber.toFixed(10);
+                this.memoryOperation = symbol;
+
+                if (this.memoryOperation !== '=') {
+                    this.historyDisplay.value += this.memoryOperation;
+                }
+                
+
             };
-        
-        };
-
-        // Функция полной очистки значений калькулятора
-
-        let operationClear = () => {
-            display.value = 0;
-            historyDisplay.value = '';
-            historyNumber = '';
-            historyArray = [];
-            memoryCurrentNumber = 0;
-            memoryOperation = '';
-            entryNewNumber = true;
             
-        };
+        }
+    }
 
-    };
-};
+    operationClear(){
+        this.display.value = 0;
+        this.historyDisplay.value = '';
+        this.historyNumber = '';
+        this.historyArray = [];
+        this.memoryCurrentNumber = 0;
+        this.memoryOperation = '';
+        this.entryNewNumber = true;
+    }
 
-export default Calc;
+}

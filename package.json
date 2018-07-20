@@ -3,17 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "sass:watch": "node-sass --watch --source-map true \"src/sass/style.scss\" \"dist/css/style.css\" ",
-    "watch": "webpack --watch",
     "server": "node server.js",
+    "watch": "webpack --watch --config webpack.dev.js",
     "sass": "node-sass \"src/sass/style.scss\" \"src/css/style.css\" ",
     "sass:dev": "node-sass --source-map true \"src/sass/style.scss\" \"src/css/style.css\" ",
+    "sass:watch": "node-sass --watch --source-map true \"src/sass/style.scss\" \"dist/css/style.css\" ",
     "delete:dev": "rimraf -- dist/dev .awcache",
     "delete:prod": "rimraf -- dist/prod .awcache",
-    "prod": "webpack --config webpack.prod.js",
-    "dev": "webpack --config webpack.dev.js",
-    "build:dev": "npm run delete:dev && npm run sass:dev && npm run dev",
-    "build:prod": "npm run delete:prod && npm run sass && npm run prod"
+    "webpack:prod": "webpack --config webpack.prod.js",
+    "webpack:dev": "webpack --config webpack.dev.js",
+    "build:dev": "npm run delete:dev && npm run sass:dev && npm run webpack:dev",
+    "build:prod": "npm run delete:prod && npm run sass && npm run webpack:prod"
   },
   "keywords": [],
   "author": "Denis Tivikov",
