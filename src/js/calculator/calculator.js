@@ -36,6 +36,7 @@ export default class Calc {
         MenuCalcBtn.init();
     }
 
+    // Иницилизация событий
     init(){
 
         // События на клик, ввод цифр 
@@ -66,6 +67,7 @@ export default class Calc {
         keyUniMin.addEventListener('click', this.operationUnoMinus.bind(this));
     }
 
+    // Функция вывода цифр на экран
     pressKeyNumber(clickEvent){
 
         let numb = clickEvent.target.textContent;
@@ -85,6 +87,7 @@ export default class Calc {
         }
     }
 
+    // Функция точки
     pressKeyDot(){
         let localMemoryDot = this.display.value;
 
@@ -102,6 +105,7 @@ export default class Calc {
         this.historyDisplay.value = this.historyNumber;
     }
 
+    // Функция унарный минус    
     operationUnoMinus(){
        
         let localMemoryNumber = this.display.value;
@@ -119,6 +123,7 @@ export default class Calc {
         }
     }
 
+    // Функция отвечающия за операции
     operationAction(clickEvent){
                   
         let localMemoryNumber = this.display.value,
@@ -205,6 +210,7 @@ export default class Calc {
         }
     }
 
+    // Функция полной очистки значений калькулятора
     operationClear(){
         this.display.value = 0;
         this.historyDisplay.value = '';
