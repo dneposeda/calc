@@ -7,8 +7,8 @@
  * По умолчание один из классов должен быть на элементе.
  * Классу необходимо передать ID элемента.
  */
-
 export default class ChangeTheme{
+    
     constructor(id){
         this.elem = document.querySelector(id);
     }

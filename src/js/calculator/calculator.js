@@ -1,12 +1,13 @@
 'use strict';
 
-import ChangeTheme from './theming/themeColor';
-import ChangeThemeType from './core/themeType';
-import HistoryDisplay from './core/historyDisplay';
+import ChangeTheme from './theming/theme_color';
+import ChangeThemeType from './core/theme_type';
+import HistoryDisplay from './core/history_display';
 import operations from './helpers/operation'; 
 import MenuCalc from './helpers/menu'; 
 
 export default class Calc {
+
     constructor(id){
 
         this.id = id;
@@ -45,7 +46,6 @@ export default class Calc {
             let keyNumber = keyNumbers[i];
             keyNumber.addEventListener('click', this.pressKeyNumber.bind(this));
         }
-
 
         // События на клик по операциям 
         let keyOperations = this.elem.querySelectorAll('.keyoperations');
@@ -89,6 +89,7 @@ export default class Calc {
 
     // Функция точки
     pressKeyDot(){
+
         let localMemoryDot = this.display.value;
 
         if (this.entryNewNumber){
@@ -171,7 +172,6 @@ export default class Calc {
                 this.display.value = +this.memoryCurrentNumber.toFixed(10);
                 this.memoryOperation = nameSymbol;
                 
-    
             } else{
                 this.entryNewNumber = true;
                 switch(this.memoryOperation){
@@ -203,8 +203,6 @@ export default class Calc {
                 if (this.memoryOperation !== '=') {
                     this.historyDisplay.value += this.memoryOperation;
                 }
-                
-
             };
             
         }
@@ -212,6 +210,7 @@ export default class Calc {
 
     // Функция полной очистки значений калькулятора
     operationClear(){
+
         this.display.value = 0;
         this.historyDisplay.value = '';
         this.historyNumber = '';
@@ -220,5 +219,4 @@ export default class Calc {
         this.memoryOperation = '';
         this.entryNewNumber = true;
     }
-
-}
+}   

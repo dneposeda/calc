@@ -5,7 +5,6 @@
  * Меняя класс-модификатор CSS.
  * Классу необходимо передать ID элемента.
  */
-
 export default class HistoryDisplay{
     
     constructor(id){

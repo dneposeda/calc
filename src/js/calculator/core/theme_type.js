@@ -5,7 +5,6 @@
  * Класс меняет ширину калькулятора добавляя класс-модификатор CSS.
  * Классу необходимо передать ID элемента.
  */
-
 export default class ChangeThemeType{
 
     constructor(id){
