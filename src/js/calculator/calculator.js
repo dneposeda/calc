@@ -5,6 +5,7 @@ import ChangeThemeType from './core/theme_type';
 import HistoryDisplay from './core/history_display';
 import operations from './helpers/operation'; 
 import MenuCalc from './helpers/menu'; 
+import WebSocketMsg from './module/websocket/message';
 
 export default class Calc {
 
@@ -32,9 +33,13 @@ export default class Calc {
         let changeHistoryDisplay = new HistoryDisplay(id);
         changeHistoryDisplay.init();
 
-        //вкл/откл меню настроек
+        // вкл/откл меню настроек
         let MenuCalcBtn = new MenuCalc(id);
         MenuCalcBtn.init();
+
+        // супер рассчет на стророне сервера
+        let webSocketMsg = new WebSocketMsg(id);
+        webSocketMsg.init();
     }
 
     // Иницилизация событий

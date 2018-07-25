@@ -127,6 +127,9 @@ sup {
   font-size: 33px;
   transition: background 0.2s; }
 
+.rur {
+  font-size: 22px; }
+
 .calculator {
   width: 260px;
   margin: 30px 50px 70px;
@@ -363,3 +366,5 @@ sup {
         transform: rotate(45deg); }
       .hamburger__line--active:before {
         transform: rotate(-45deg); }
+
+/*# sourceMappingURL=style.css.map */

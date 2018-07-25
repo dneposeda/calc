@@ -124,17 +124,17 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _themeColor = __webpack_require__(/*! ./theming/themeColor */ "./src/js/calculator/theming/themeColor.js");
+var _theme_color = __webpack_require__(/*! ./theming/theme_color */ "./src/js/calculator/theming/theme_color.js");
 
-var _themeColor2 = _interopRequireDefault(_themeColor);
+var _theme_color2 = _interopRequireDefault(_theme_color);
 
-var _themeType = __webpack_require__(/*! ./core/themeType */ "./src/js/calculator/core/themeType.js");
+var _theme_type = __webpack_require__(/*! ./core/theme_type */ "./src/js/calculator/core/theme_type.js");
 
-var _themeType2 = _interopRequireDefault(_themeType);
+var _theme_type2 = _interopRequireDefault(_theme_type);
 
-var _historyDisplay = __webpack_require__(/*! ./core/historyDisplay */ "./src/js/calculator/core/historyDisplay.js");
+var _history_display = __webpack_require__(/*! ./core/history_display */ "./src/js/calculator/core/history_display.js");
 
-var _historyDisplay2 = _interopRequireDefault(_historyDisplay);
+var _history_display2 = _interopRequireDefault(_history_display);
 
 var _operation = __webpack_require__(/*! ./helpers/operation */ "./src/js/calculator/helpers/operation.js");
 
@@ -143,6 +143,10 @@ var _operation2 = _interopRequireDefault(_operation);
 var _menu = __webpack_require__(/*! ./helpers/menu */ "./src/js/calculator/helpers/menu.js");
 
 var _menu2 = _interopRequireDefault(_menu);
+
+var _message = __webpack_require__(/*! ./module/websocket/message */ "./src/js/calculator/module/websocket/message.js");
+
+var _message2 = _interopRequireDefault(_message);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -156,21 +160,28 @@ var Calc = function () {
         this.elem = document.querySelector(this.id), this.display = this.elem.querySelector('.display'), this.historyDisplay = this.elem.querySelector('.displayHistory'), this.historyNumber = '', this.memoryCurrentNumber = 0, this.memoryOperation = '', this.historyArray = [], this.entryNewNumber = false;
 
         // смена цветовой темы    
-        var changeTheme = new _themeColor2.default(id);
+        var changeTheme = new _theme_color2.default(id);
         changeTheme.init();
 
         // смена типа калькулятора
-        var calcType = new _themeType2.default(id);
+        var calcType = new _theme_type2.default(id);
         calcType.init();
 
         //вкл/откл истории операций
-        var changeHistoryDisplay = new _historyDisplay2.default(id);
+        var changeHistoryDisplay = new _history_display2.default(id);
         changeHistoryDisplay.init();
 
-        //вкл/откл меню настроек
+        // вкл/откл меню настроек
         var MenuCalcBtn = new _menu2.default(id);
         MenuCalcBtn.init();
+
+        // супер рассчет на стророне сервера
+        var webSocketMsg = new _message2.default(id);
+        webSocketMsg.init();
     }
+
+    // Иницилизация событий
+
 
     _createClass(Calc, [{
         key: 'init',
@@ -202,6 +213,9 @@ var Calc = function () {
             var keyUniMin = this.elem.querySelector('.unomin');
             keyUniMin.addEventListener('click', this.operationUnoMinus.bind(this));
         }
+
+        // Функция вывода цифр на экран
+
     }, {
         key: 'pressKeyNumber',
         value: function pressKeyNumber(clickEvent) {
@@ -222,9 +236,13 @@ var Calc = function () {
                 }
             }
         }
+
+        // Функция точки
+
     }, {
         key: 'pressKeyDot',
         value: function pressKeyDot() {
+
             var localMemoryDot = this.display.value;
 
             if (this.entryNewNumber) {
@@ -240,6 +258,9 @@ var Calc = function () {
             this.historyNumber = this.display.value;
             this.historyDisplay.value = this.historyNumber;
         }
+
+        // Функция унарный минус    
+
     }, {
         key: 'operationUnoMinus',
         value: function operationUnoMinus() {
@@ -258,6 +279,9 @@ var Calc = function () {
                 this.historyDisplay.value = this.historyNumber;
             }
         }
+
+        // Функция отвечающия за операции
+
     }, {
         key: 'operationAction',
         value: function operationAction(clickEvent) {
@@ -340,9 +364,13 @@ var Calc = function () {
                 };
             }
         }
+
+        // Функция полной очистки значений калькулятора
+
     }, {
         key: 'operationClear',
         value: function operationClear() {
+
             this.display.value = 0;
             this.historyDisplay.value = '';
             this.historyNumber = '';
@@ -360,10 +388,10 @@ exports.default = Calc;
 
 /***/ }),
 
-/***/ "./src/js/calculator/core/historyDisplay.js":
-/*!**************************************************!*\
-  !*** ./src/js/calculator/core/historyDisplay.js ***!
-  \**************************************************/
+/***/ "./src/js/calculator/core/history_display.js":
+/*!***************************************************!*\
+  !*** ./src/js/calculator/core/history_display.js ***!
+  \***************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -416,10 +444,10 @@ exports.default = HistoryDisplay;
 
 /***/ }),
 
-/***/ "./src/js/calculator/core/themeType.js":
-/*!*********************************************!*\
-  !*** ./src/js/calculator/core/themeType.js ***!
-  \*********************************************/
+/***/ "./src/js/calculator/core/theme_type.js":
+/*!**********************************************!*\
+  !*** ./src/js/calculator/core/theme_type.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -545,6 +573,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 var operations = {
+
     /**
      *  (1+2)
      * Функция сложения двух чисел.
@@ -552,6 +581,7 @@ var operations = {
      * Возращает результат от операции.
      */
     addition: function addition(numberOne, numberTwo) {
+
         var add = parseFloat(numberOne) + parseFloat(numberTwo);
         return add;
     },
@@ -563,6 +593,7 @@ var operations = {
      * Возращает результат от операции.
      */
     subtraction: function subtraction(numberOne, numberTwo) {
+
         var sub = parseFloat(numberOne) - parseFloat(numberTwo);
         return sub;
     },
@@ -572,6 +603,7 @@ var operations = {
      * Функция умножения, возращает произведение двух чисел.
      */
     multiplication: function multiplication(numberOne, numberTwo) {
+
         var mlp = parseFloat(numberOne) * parseFloat(numberTwo);
         return mlp;
     },
@@ -592,6 +624,7 @@ var operations = {
      * Возращает результат от операции.
      */
     factorial: function factorial(numberOne) {
+
         var iteration = function iteration(counter, accum) {
             if (counter === 1 || counter === 0) {
                 return accum;
@@ -609,6 +642,7 @@ var operations = {
      * Возращает результат от операции.
      */
     exponentiation: function exponentiation(numberOne, numberTwo) {
+
         var pow = Math.pow(numberOne, numberTwo);
         return pow;
     },
@@ -619,6 +653,7 @@ var operations = {
      * Возращает результат от операции.
      */
     mathroot: function mathroot(numberOne, numberTwo) {
+
         var mrt = Math.pow(numberOne, 1 / numberTwo);
         return mrt;
     },
@@ -629,6 +664,7 @@ var operations = {
      * Возращает результат от операции.
      */
     log: function log(numberOne) {
+
         var log = Math.log10(numberOne);
         return log;
     },
@@ -639,6 +675,7 @@ var operations = {
      * Возращает результат от операции.
      */
     sqrt: function sqrt(numberOne) {
+
         var sqrt = Math.sqrt(numberOne);
         return sqrt;
     },
@@ -647,6 +684,7 @@ var operations = {
      * Функция проценты
      */
     percentage: function percentage(numberOne, numberTwo) {
+
         var percentage = numberOne / 100 * parseFloat(numberTwo);
         return percentage;
     }
@@ -656,10 +694,77 @@ exports.default = operations;
 
 /***/ }),
 
-/***/ "./src/js/calculator/theming/themeColor.js":
-/*!*************************************************!*\
-  !*** ./src/js/calculator/theming/themeColor.js ***!
-  \*************************************************/
+/***/ "./src/js/calculator/module/websocket/message.js":
+/*!*******************************************************!*\
+  !*** ./src/js/calculator/module/websocket/message.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var webMessage = function () {
+  function webMessage(id) {
+    _classCallCheck(this, webMessage);
+
+    this.socket = new WebSocket("ws://localhost:3001");
+    this.elem = document.querySelector(id);
+    this.display = this.elem.querySelector('.display');
+  }
+
+  _createClass(webMessage, [{
+    key: 'init',
+    value: function init() {
+      var _this = this;
+
+      /**
+       * По событию клик на ₽, запускается функция
+       * отправки рассчета в backend
+       */
+      var btnRur = this.elem.querySelector('.rur');
+      btnRur.addEventListener('click', this.calcRur.bind(this));
+
+      // Принимаем ответ от backend
+      this.socket.onmessage = function (event) {
+        _this.showMessage(event.data);
+      };
+    }
+  }, {
+    key: 'calcRur',
+    value: function calcRur() {
+
+      // Отправляю введеную цифру на рассчет в backend
+      this.socket.send(this.display.value);
+    }
+  }, {
+    key: 'showMessage',
+    value: function showMessage(data) {
+
+      // Принятый результат вывожу на дисплей
+      this.display.value = data;
+    }
+  }]);
+
+  return webMessage;
+}();
+
+exports.default = webMessage;
+
+/***/ }),
+
+/***/ "./src/js/calculator/theming/theme_color.js":
+/*!**************************************************!*\
+  !*** ./src/js/calculator/theming/theme_color.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

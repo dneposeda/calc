@@ -510,6 +510,9 @@ sup {
   -webkit-transition: background 0.2s;
   transition: background 0.2s; }
 
+.rur {
+  font-size: 22px; }
+
 .calculator {
   width: 260px;
   margin: 30px 50px 70px;
