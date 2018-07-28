@@ -1,6 +1,7 @@
 'use strict';
   
-var operations = {
+let operations = {
+
     /**
      *  (1+2)
      * Функция сложения двух чисел.
@@ -8,6 +9,7 @@ var operations = {
      * Возращает результат от операции.
      */
     addition: function(numberOne, numberTwo){
+
         let add = parseFloat(numberOne) + parseFloat(numberTwo);
         return add;
     },
@@ -19,6 +21,7 @@ var operations = {
      * Возращает результат от операции.
      */
     subtraction: function(numberOne, numberTwo){
+
         let sub = parseFloat(numberOne) - parseFloat(numberTwo);
         return sub;
     },
@@ -28,6 +31,7 @@ var operations = {
      * Функция умножения, возращает произведение двух чисел.
      */
     multiplication: function(numberOne, numberTwo){
+
         let mlp = parseFloat(numberOne) * parseFloat(numberTwo);
         return mlp;
     },
@@ -50,6 +54,7 @@ var operations = {
      * Возращает результат от операции.
      */
     factorial: function(numberOne){
+
         let iteration = function(counter, accum){
             if (counter === 1 || counter === 0) {
                 return accum;
@@ -61,13 +66,13 @@ var operations = {
         return iteration(+numberOne, 1);
     },
 
-
     /**
      *  (X в степени n)
      * Функция возведения в степень. Используется стандартный функционал Math
      * Возращает результат от операции.
      */
     exponentiation: function(numberOne, numberTwo){
+
         let pow = Math.pow(numberOne, numberTwo);
         return pow;
     },
@@ -78,6 +83,7 @@ var operations = {
      * Возращает результат от операции.
      */
     mathroot: function(numberOne, numberTwo){
+
         let mrt = Math.pow(numberOne, 1/numberTwo);
         return mrt;
     },
@@ -88,6 +94,7 @@ var operations = {
      * Возращает результат от операции.
      */
     log: function(numberOne){
+
         let log = Math.log10(numberOne);
         return log;
     },
@@ -98,23 +105,20 @@ var operations = {
      * Возращает результат от операции.
      */
     sqrt: function(numberOne){
+
         let sqrt = Math.sqrt(numberOne);
         return sqrt;
     },
-
 
     /**
      * Функция проценты
      */
     percentage: function(numberOne, numberTwo){
+        
         let percentage = (numberOne / 100) * parseFloat(numberTwo);
         return percentage;
     },
 }
-
-
-
-
 
 
 export default operations;

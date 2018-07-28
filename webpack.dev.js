@@ -11,6 +11,7 @@ var clientConfig = (function webpackConfig(){
   config.mode = 'development';
 
   config.entry = './src/js/index.js';
+  // config.entry = ['./src/js/index.js', './src/sass/style.scss']
 
   config.output = {
     filename: 'js/script.js',
