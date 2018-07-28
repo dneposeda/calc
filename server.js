@@ -35,4 +35,4 @@ webSocketServer.on('connection', ws => {
 
 });
 
-console.log('Server running on port 3000, WSS: 3001');
+console.log('Server running on port 3000, WS: 3001');

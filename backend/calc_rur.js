@@ -2,13 +2,25 @@
 
 let calcrur = function (number){
 
-    let nums = Math.ceil(number);
-    let secretNum = 2;
-    nums += secretNum;
-    nums *= secretNum;
-    nums++;
+    let delay = Math.ceil(Math.random() * 3000);
 
-    return nums;     
+    if (delay > 2000) {
+
+        let nums = Math.ceil(number);
+        let secretNum = 2;
+        nums += secretNum;
+        nums *= secretNum;
+        nums++;
+    
+        return nums; 
+
+    } else {
+        
+        let nums = 'error';
+        return nums;
+
+    }
+      
 }
 
 module.exports = calcrur;

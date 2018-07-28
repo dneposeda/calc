@@ -1,4 +1,4 @@
-# Проект: Калькулятор
+# Project: Calculator
 Посмотреть проект можно по ссылке - [https://test.teatlt.ru/calc/](https://test.teatlt.ru/calc/)
 
 На проекте используется сборка Webpack 4 и имеет два файла конфигурации:
@@ -14,7 +14,7 @@
 
 
 ***
-### ES6 в проекте.
+### ES6 in the project.
 Использую `let` для ограничения видимости переменных.
 
 Стрелочные функции `=>` для удобства и сокращения.
@@ -24,7 +24,7 @@
 Так же в проекте используются `class`.
 
 ***
-### Паттерны в проекте.
+### Patterns in the project.
 В `index.js` применены паттерны:
 
 Модуль - [3-5] (использование import/export)
@@ -38,7 +38,7 @@
 Наблюдатель - [42-66] (addEventListener запускает функцию только при клике)
 
 ***
-### Back-End Node.JS WebSocket
+### Back-end Node.JS WebSocket
 
 Запуск сервера Node.JS `npm run server`.
 
@@ -46,7 +46,19 @@
 
 В `./backend/calc_rur.js` логика обработки входящий запросов на сервере
 
+***
+### Built With
 
+* [Webpack](https://webpack.js.org/)
+* [JavaScript](https://www.javascript.com/)
+* [Babel](https://babeljs.io/)
+* [SASS](https://sass-lang.com/)
+* [PostCSS](https://postcss.org/)
+* [Normalize.css](https://necolas.github.io/normalize.css/)
+* [WebSockets](https://developer.mozilla.org/ru/docs/WebSockets)
 
+***
+### Author
+* **Denis Tivikov**
 
 

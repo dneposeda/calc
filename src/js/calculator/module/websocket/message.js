@@ -31,8 +31,15 @@ export default class webMessage {
 
   showMessage(data){
 
-    // Принятый результат вывожу на дисплей
-    this.display.value = data;
+    
+    if(data != 'error'){
+
+      // Принятый результат вывожу на дисплей
+      this.display.value = data;
+    } else {
+      this.display.value = 'error';
+    }
+    
   }
 }
 
